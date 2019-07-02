@@ -1,0 +1,86 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.libs" >
+
+    <!--网络-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--相机-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- <&#45;&#45;!向SD卡写入数据的权限-&ndash;&gt; -->
+    <uses-permission android:name="androd.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- <&#45;&#45;!读取数据的权限-&ndash;&gt; -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--震动-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <!--电话-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--指纹-->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+
+    <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:targetApi="n">
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
+        <!--双服务+广播保活 之 服务1-->
+        <service
+            android:name="com.libs.modle.service.keepLive.doubleService.LiveServiceOne"
+            android:persistent="true"
+            android:process=":remote">
+            <!--intent-filter android:priority="1000"
+           将服务的优先级设置为最高1000
+           -->
+            <intent-filter android:priority="1000">
+                <!--这里定义服务的名字-->
+                <action android:name="myservice1" />
+            </intent-filter>
+        </service>
+        <!--双服务+广播保活 之 服务2-->
+        <service
+            android:name="com.libs.modle.service.keepLive.doubleService.LiveServiceTwo"
+            android:persistent="true"
+            android:process=":remote">
+            <intent-filter android:priority="1000">
+                <action android:name="myservice2" />
+            </intent-filter>
+        </service>
+        <!--GPS开启/关闭监听广播-->
+        <receiver android:name=".modle.broadcastreceivers.GPSBroadcastReceiver$Receiver" />
+        <!--home键监听广播-->
+        <receiver android:name=".modle.broadcastreceivers.HomeBroadcastReceiver$Receiver" />
+        <!--锁屏监听广播-->
+        <receiver android:name=".modle.broadcastreceivers.LockScreenBroadcastReceiver$Receiver" />
+        <!--网络变化广播监听-->
+        <receiver android:name=".modle.broadcastreceivers.NetChangeBroadcastReceiver$Receiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <!--通知栏广播-->
+        <receiver android:name=".modle.broadcastreceivers.NotificationBroadcastReceiver">
+            <intent-filter>
+                <action android:name="notification_cancelled" />
+                <action android:name="notification_clicked" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+</manifest>

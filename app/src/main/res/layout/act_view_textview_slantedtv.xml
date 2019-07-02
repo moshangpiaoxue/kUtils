@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <mo.klib.view.textView.KSlantedTextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            app:slantedBackgroundColor="@color/color_4499FD"
+            app:slantedLength="40dp"
+            app:slantedMode="left"
+            app:slantedText="左上矩形"
+            app:slantedTextColor="@color/color_000000"
+            app:slantedTextSize="16sp" />
+
+        <mo.klib.view.textView.KSlantedTextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="right"
+            android:gravity="center"
+            app:slantedBackgroundColor="@color/color_4499FD"
+            app:slantedLength="40dp"
+            app:slantedMode="right"
+            app:slantedText="右上矩形"
+            app:slantedTextColor="@color/color_000000"
+            app:slantedTextSize="16sp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <mo.klib.view.textView.KSlantedTextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            app:slantedBackgroundColor="@color/color_4499FD"
+            app:slantedLength="40dp"
+            app:slantedMode="left_bottom"
+            app:slantedText="左下矩形"
+            app:slantedTextColor="@color/color_000000"
+            app:slantedTextSize="16sp" />
+
+        <mo.klib.view.textView.KSlantedTextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="right"
+            android:gravity="center"
+            app:slantedBackgroundColor="@color/color_4499FD"
+            app:slantedDegree="30"
+            app:slantedLength="40dp"
+            app:slantedMode="right_bottom"
+            app:slantedText="文字角度10"
+            app:slantedTextColor="@color/color_000000"
+            app:slantedTextSize="16sp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <mo.klib.view.textView.KSlantedTextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            app:slantedBackgroundColor="@color/color_4499FD"
+            app:slantedLength="40dp"
+            app:slantedMode="left_triangle"
+            app:slantedText="左上三角形"
+            app:slantedTextColor="@color/color_000000"
+            app:slantedTextSize="16sp" />
+
+        <mo.klib.view.textView.KSlantedTextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="right"
+            android:gravity="center"
+            app:slantedBackgroundColor="@color/color_4499FD"
+            app:slantedLength="40dp"
+            app:slantedMode="right_triangle"
+            app:slantedText="右上三角形"
+            app:slantedTextColor="@color/color_000000"
+            app:slantedTextSize="16sp" />
+
+    </FrameLayout>
+
+
+</LinearLayout>

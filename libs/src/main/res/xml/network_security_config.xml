@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <!--&lt;!&ndash;默认配置，明文通信，使用系统证书&ndash;&gt;-->
+    <!--<base-config cleartextTrafficPermitted="true">-->
+    <!--<trust-anchors>-->
+    <!--&lt;!&ndash;trust system while release only&ndash;&gt;-->
+    <!--<certificates src="system" />-->
+    <!--</trust-anchors>-->
+    <!--</base-config>-->
+    <!--&lt;!&ndash;自己服务器，使用https，将所有域名添加到此&ndash;&gt;-->
+    <!--<domain-config cleartextTrafficPermitted="false">-->
+    <!--<domain includeSubdomains="true">intest.towatt.cn</domain>-->
+    <!--&lt;!&ndash;<trust-anchors>&ndash;&gt;-->
+    <!--&lt;!&ndash;<certificates src="@raw/my_proxy_ssl_proxying_certificate" />&ndash;&gt;-->
+    <!--&lt;!&ndash;</trust-anchors>&ndash;&gt;-->
+    <!--</domain-config>-->
+    <!--&lt;!&ndash;debug模式，可以使用用户自己安装的正式，比如charles抓包安装的证书，这个配置只在 android:debuggable 为 "true" 时将应用的重写，IDE 和构建工具生成的非发布版本通常属于此情况&ndash;&gt;-->
+    <!--<debug-overrides>-->
+    <!--&lt;!&ndash; Trust user added CAs while debuggable only &ndash;&gt;-->
+    <!--<trust-anchors>-->
+    <!--<certificates src="system" />-->
+    <!--<certificates src="user" />-->
+    <!--</trust-anchors>-->
+    <!--</debug-overrides>-->
+</network-security-config>

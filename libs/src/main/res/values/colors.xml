@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_biometric_prompt_dialog">#99000000</color>
+    <color name="text_quaternary">#CDCED0</color>
+    <color name="text_red">#FF5555</color>
+    <color name="text_green">#82C785</color>
+
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="color_ffffff">#ffffff</color>
+
+    <color name="color_e2e2e2">#e2e2e2</color>
+    <color name="color_e5e5e5">#e5e5e5</color>
+    <color name="color_e6e6e6">#e6e6e6</color>
+    <color name="color_f5f5f5">#f5f5f5</color>
+    <color name="color_f6f6f6">#f6f6f6</color>
+    <color name="color_f2fef0">#f2fef0</color>
+    <color name="color_fffef0">#fffef0</color>
+    <color name="color_fff7fc">#fff7fc</color>
+    <color name="color_fefefe">#fefefe</color>
+    <color name="font_black_6">#e0e0e0</color>
+    <color name="color_ebf9f2">#ebf9f2</color>
+    <color name="color_f994d5">#F994D5</color>
+    <color name="color_F087CA">#F087CA</color>
+    <color name="color_F7523A">#F7523A</color>
+    <color name="color_f75137">#f75137</color>
+    <color name="color_f8523a">#f8523a</color>
+    <color name="color_ff0000">#ff0000</color>
+    <color name="color_FF0000">#FF0000</color>
+    <color name="color_35c67d">#35c67d</color>
+    <color name="color_38C67D">#38C67D</color>
+    <color name="color_4cca88">#4cca88</color>
+    <color name="color_939393">#939393</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_263238">#263238</color>
+    <color name="color_4d4d4d">#4d4d4d</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_D8D8D8">#D8D8D8</color>
+    <color name="color_629EFF">#629EFF</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_5A5A5A">#5A5A5A</color>
+    <color name="color_C5CAD2">#C5CAD2</color>
+    <color name="color_000000">#000000</color>
+    <color name="color_2C3136">#2C3136</color>
+    <color name="color_F4F8FF">#F4F8FF</color>
+    <color name="color_F4F4F4">#F4F4F4</color>
+    <color name="color_B9B9B9">#B9B9B9</color>
+
+    <color name="color_303030">#303030</color>
+
+    <color name="color_F7F8FC">#F7F8FC</color>
+
+    <color name="color_BDC4CE">#BDC4CE</color>
+
+    <color name="color_ACACAC">#ACACAC</color>
+    <color name="color_c1c1c1">#c1c1c1</color>
+    <color name="color_4499FD">#4499FD</color>
+    <color name="color_097fdc">#097fdc</color>
+</resources>

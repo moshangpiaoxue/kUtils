@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--自定义倾斜45°的TextView的自定义属性-->
+    <declare-styleable name="KSlantedTextView">
+        <!--倾斜文字角度-->
+        <attr name="slantedDegree" format="integer" />
+        <!--倾斜背景颜色-->
+        <attr name="slantedBackgroundColor" format="color" />
+        <!--倾斜文字颜色-->
+        <attr name="slantedTextColor" format="color" />
+        <!--倾斜文字大小-->
+        <attr name="slantedTextSize" format="dimension" />
+        <!--倾斜文字内容-->
+        <attr name="slantedText" format="string" />
+        <!--倾斜背景 边长距离(高度)-->
+        <attr name="slantedLength" format="dimension" />
+        <!--倾斜模式-->
+        <attr name="slantedMode" format="enum">
+            <!--左上角倾斜模式-->
+            <enum name="left" value="0" />
+            <!--右上角倾斜模式-->
+            <enum name="right" value="1" />
+            <!--左下角倾斜模式-->
+            <enum name="left_bottom" value="2" />
+            <!--右下角倾斜模式-->
+            <enum name="right_bottom" value="3" />
+            <!--左上角倾斜三角形模式-->
+            <enum name="left_triangle" value="4" />
+            <!--右上角倾斜三角形模式-->
+            <enum name="right_triangle" value="5" />
+            <!--左下角倾斜三角形模式-->
+            <enum name="left_bottom_triangle" value="6" />
+            <!--右下角倾斜三角形模式-->
+            <enum name="right_bottom_triangle" value="7" />
+        </attr>
+    </declare-styleable>
+</resources>

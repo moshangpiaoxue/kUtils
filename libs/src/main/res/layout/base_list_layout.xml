@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ll_base_list_addlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+
+    <com.libs.view.PullToRefresh.KPullToRefreshLayout
+        android:id="@+id/k_pull_layout"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:background="#f6f6f6"
+        android:layout_height="match_parent">
+
+        <com.libs.view.recyclerView.KRecycleView
+            android:id="@+id/k_recycleview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.libs.view.PullToRefresh.KPullToRefreshLayout>
+</LinearLayout>

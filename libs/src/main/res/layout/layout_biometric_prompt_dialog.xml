@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/dp_250"
+        android:layout_marginRight="@dimen/dp_250"
+        android:background="@drawable/dialog_finger_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="指纹验证"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_width="@dimen/pt_dp_50"
+            android:layout_height="@dimen/pt_dp_50"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/finger_notice" />
+
+        <TextView
+            android:id="@+id/state_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/pt_dp_30"
+            android:layout_marginTop="@dimen/dp_42"
+            android:layout_marginRight="@dimen/pt_dp_30"
+            android:gravity="center"
+            android:text="验证您的指纹"
+            android:textColor="#CDCED0"
+            android:textSize="15sp"
+            android:typeface="normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_45"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="#757575" />
+
+        <TextView
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#419BF9"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

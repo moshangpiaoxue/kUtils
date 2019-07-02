@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--位移-->
+    /**
+    *fromXDelta:从X轴方向上的什么地方开始
+    *toXDelta:从X轴方向上的什么地方结束
+    *fromYDelta:从Y轴方向上的什么地方开始
+    *toYDelta:从Y轴方向上的什么地方结束
+    *duration:这个位移动画的持续时间
+    *10%p：其中10%===百分之十的百分比、p===当前屏幕的宽度或者高度，负值就在屏幕外了
+    /
+    <translate
+
+        android:duration="1000"
+        android:fromXDelta="10%p"
+        android:fromYDelta="10"
+        android:toXDelta="10"
+        android:toYDelta="10" />
+</set>

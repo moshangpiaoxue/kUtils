@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--圆角imageview属性-->
+    <declare-styleable name="RadiusImageView">
+        <attr name="riv_circle" format="boolean" />
+        <attr name="riv_radius" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="Theme">
+        <attr name="RadiusImageViewStyle" format="reference" />
+    </declare-styleable>
+</resources>

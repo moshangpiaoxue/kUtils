@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ExpandableTextView">
+        <!--收缩状态下最多显示几行：-->
+        <attr name="etv_MaxLinesOnShrink" format="reference|integer" />
+        <!--收缩状态下尾部默认字符：默认...-->
+        <attr name="etv_EllipsisHint" format="reference|string" /><!--default is ..-->
+        <!--收缩状态下尾部的提示字符：默认为“展开”-->
+        <attr name="etv_ToExpandHint" format="reference|string" /><!--"to expand" hint string, default is "Expand"-->
+        <!--展开状态下尾部的提示字符：默认为“收起”-->
+        <attr name="etv_ToShrinkHint" format="reference|string" /><!--"to shrink" hint string, default is "Shrink"-->
+        <!--展开提示和收缩提示与正文之间插入的文本：默认“”-->
+        <attr name="etv_GapToExpandHint" format="reference|string" /><!--gap between "toExpandHint" and "trimmed text"-->
+        <attr name="etv_GapToShrinkHint" format="reference|string" /><!--gap between "toShrinkHint" and "trimmed text"-->
+        <!--点击正文部分是否可以切换展开收缩状态：默认 true-->
+        <attr name="etv_EnableToggle" format="reference|boolean" /><!--if toggle the state when click ExpandTextView-->
+        <!--是否显示展开提示：默认 true-->
+        <attr name="etv_ToExpandHintShow" format="reference|boolean" /><!--if show "toExpandHint"-->
+        <!--是否显示收缩提示：默认 true-->
+        <attr name="etv_ToShrinkHintShow" format="reference|boolean" /><!--if show "toShrinkHint"-->
+        <!--展开提示字符颜色：-->
+        <attr name="etv_ToExpandHintColor" format="reference|color" /><!--text color of "toExpandHint"-->
+        <!--收缩提示字符颜色：-->
+        <attr name="etv_ToShrinkHintColor" format="reference|color" /><!--text color of "toShrinkHint"-->
+        <!--点击收缩提示字符时，提示字符的背景色-->
+        <attr name="etv_ToExpandHintColorBgPressed" format="reference|color" /><!--background color if "toExpandHint" pressed-->
+        <!--设置初始状态，展开还是收缩：默认是收缩状态-->
+        <attr name="etv_ToShrinkHintColorBgPressed" format="reference|color" /><!--background color if "toShrinkHint" pressed-->
+        <!--设置初始状态，展开还是收缩：默认是收缩状态-->
+        <attr name="etv_InitState" format="enum"><!--init state, default is shrink-->
+            <enum name="shrink" value="0"/>
+            <enum name="expand" value="1"/>
+        </attr>
+    </declare-styleable>
+
+</resources>

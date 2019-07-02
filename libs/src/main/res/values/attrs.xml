@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--进度条-->
+    <declare-styleable name="Loading">
+        <attr name="outer_width" format="dimension" />
+        <attr name="outer_color" format="color" />
+        <attr name="inner_width" format="dimension" />
+        <attr name="inner_color" format="color" />
+        <attr name="inner_rotating_speed" format="integer"></attr>
+        <attr name="mode">
+            <enum name="arc" value="1" />
+            <enum name="circle" value="2" />
+            <enum name="custom" value="3" />
+        </attr>
+        <!-- mode=circle时有效 -->
+        <attr name="inner_circle_speed" format="integer"></attr>
+        <!-- mode=custom时有效 -->
+        <attr name="inner_custom_degree" format="integer"></attr>
+    </declare-styleable>
+    <!--
+       max                 最大进度
+       startAngle             进度从圆环的哪个角度开始走
+       backColor             圆环内部的填充色
+       roundColor             圆环的颜色
+       roundProgressColor  圆环进度的颜色
+       roundWidth             圆环宽度
+       textColor             中心文字的颜色
+       textSize             中心文字的大小
+       textIsDisplayable     中心文字是否显示
+       style = 0/1          进度的风格，实心或者空心
+    -->
+    <declare-styleable name="RoundProgressBar">
+        <attr name="max" format="integer" />
+        <attr name="startAngle" format="integer" />
+        <attr name="roundColor" format="color" />
+        <attr name="roundProgressColor" format="color" />
+        <attr name="roundWidth" format="dimension" />
+        <attr name="backColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textIsDisplayable" format="boolean" />
+        <attr name="style">
+            <enum name="STROKE" value="0" />
+            <enum name="FILL" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SignatureView">
+        <attr name="minWidth" format="dimension" />
+        <attr name="maxWidth" format="dimension" />
+        <attr name="penColor" format="color" />
+        <attr name="velocityFilterWeight" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="KCornerTextView">
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="borderWidthColor" format="color"/>
+        <attr name="cornersize" format="dimension"/>
+        <!-- 1:边框的宽度 2：边框的颜色   4：边角的大小      -->
+
+    </declare-styleable>
+</resources>

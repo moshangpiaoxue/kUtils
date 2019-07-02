@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--顶部-->
+    <LinearLayout
+        android:id="@+id/ll_base_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <com.libs.view.KTitleView
+        android:id="@+id/ktv_base_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <!--主体-->
+    <FrameLayout
+        android:id="@+id/ll_base_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <!--数据布局-->
+        <FrameLayout
+            android:id="@+id/fl_base_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!--空数据-->
+        <include
+            layout="@layout/base_empty"
+            android:visibility="gone" />
+        <!--报错-->
+        <include
+            layout="@layout/base_error"
+            android:visibility="gone" />
+        <!--没网-->
+        <include
+            layout="@layout/base_error_net"
+            android:visibility="gone" />
+        <!--加载中-->
+        <include
+            layout="@layout/base_loading"
+            android:visibility="gone" />
+    </FrameLayout>
+    <!--底部-->
+    <LinearLayout
+        android:id="@+id/ll_base_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+</LinearLayout>

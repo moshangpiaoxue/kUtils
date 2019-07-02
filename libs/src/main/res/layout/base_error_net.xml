@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:id="@+id/ll_base_error_net"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_base_error_net"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@mipmap/ic_nowifi"
+        android:scaleType="centerInside"
+        />
+
+    <TextView
+        android:id="@+id/tv_base_error_net"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:text="网络未连接"
+        />
+
+    <TextView
+        android:id="@+id/tv_base_error_net_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:text="您的设备网络不稳定\n请检查后点击图标重试"
+        android:textColor="#aaaaaa"
+        />
+
+</LinearLayout>
