@@ -153,6 +153,7 @@ public abstract class KBaseListActivity<T> extends KBaseLayoutActivity {
     public void loardMoreAdapter(List<T> list) {
         if (list != null && list.size() != 0) {
             mWrapper.loadMore(list);
+            mData.addAll(list);
         } else {
             mPage -= 1;
             showToast("没有更多数据");
