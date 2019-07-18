@@ -14,6 +14,7 @@ import android.text.Layout.Alignment;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.text.style.AbsoluteSizeSpan;
 import android.text.style.AlignmentSpan;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.BulletSpan;
@@ -34,8 +35,8 @@ import android.text.style.URLSpan;
 import android.text.style.UnderlineSpan;
 import android.widget.TextView;
 
-
 import com.libs.k;
+import com.libs.utils.dataUtil.dealUtil.DensityUtil;
 
 import static android.graphics.BlurMaskFilter.Blur;
 import static android.text.style.DynamicDrawableSpan.ALIGN_BOTTOM;
@@ -107,7 +108,7 @@ public class SpannableStringUtil {
         private boolean isBlur;
         private float radius;
         private Blur style;
-
+        private int size = -1;
         private SpannableStringBuilder mBuilder;
 
 
@@ -122,6 +123,15 @@ public class SpannableStringUtil {
             mBuilder = new SpannableStringBuilder();
         }
 
+        /**
+         * 设置字体大小，不用转，让哥来
+         * @param size
+         * @return
+         */
+        public Builder setSize(int size) {
+            this.size = DensityUtil.dp2px(size);
+            return this;
+        }
         /**
          * 设置标识
          *
@@ -472,6 +482,10 @@ public class SpannableStringUtil {
             int start = mBuilder.length();
             mBuilder.append(this.text);
             int end = mBuilder.length();
+            if (size!=-1){
+                mBuilder.setSpan(new AbsoluteSizeSpan(size), start, end, flag);
+                size = -1;
+            }
             if (foregroundColor != defaultValue) {
                 mBuilder.setSpan(new ForegroundColorSpan(foregroundColor), start, end, flag);
                 foregroundColor = defaultValue;
@@ -539,20 +553,20 @@ public class SpannableStringUtil {
             if (imageIsBitmap || imageIsDrawable || imageIsUri || imageIsResourceId) {
 
                 if (imageIsBitmap) {
-                    mBuilder.setSpan(new ImageSpan(k.app(), bitmap,verticalAlignment), start, end, flag);
+                    mBuilder.setSpan(new ImageSpan(k.app(), bitmap, verticalAlignment), start, end, flag);
                     bitmap = null;
                     imageIsBitmap = false;
                 } else if (imageIsDrawable) {
-                    mBuilder.setSpan(new ImageSpan(drawable,verticalAlignment), start, end, flag);
+                    mBuilder.setSpan(new ImageSpan(drawable, verticalAlignment), start, end, flag);
                     drawable = null;
                     imageIsDrawable = false;
                 } else if (imageIsUri) {
-                    mBuilder.setSpan(new ImageSpan(k.app(), uri,verticalAlignment), start, end, flag);
+                    mBuilder.setSpan(new ImageSpan(k.app(), uri, verticalAlignment), start, end, flag);
                     uri = null;
 
                     imageIsUri = false;
                 } else {
-                    mBuilder.setSpan(new ImageSpan(k.app(), resourceId,verticalAlignment), start, end, flag);
+                    mBuilder.setSpan(new ImageSpan(k.app(), resourceId, verticalAlignment), start, end, flag);
                     resourceId = 0;
 
                     imageIsResourceId = false;

@@ -2,6 +2,7 @@ package com.libs.modle.adapter;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -133,7 +134,7 @@ public abstract class KRecycleViewAdapter<T> extends RecyclerView.Adapter<KRecyc
      * @param position
      */
     @Override
-    public void onBindViewHolder(final KRecycleViewHolder holder, int position) {
+    public void onBindViewHolder(final KRecycleViewHolder holder, @SuppressLint("RecyclerView") int position) {
         mItemPosition = position;
         if (isShow) {
             setAnimation(holder.itemView, position);
