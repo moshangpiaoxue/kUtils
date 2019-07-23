@@ -72,9 +72,9 @@ public class KReceiverActivity extends KRxJavaActivity implements KOnNetChangeLi
     @Override
     protected void onResume() {
         super.onResume();
-        if (gpsBroadcastReceiver == null) {
-            onGpsStatusChange(KLocationManager.INSTANCE.isOpen());
-        }
+//        if (gpsBroadcastReceiver == null) {
+//            onGpsStatusChange(KLocationManager.INSTANCE.isOpen());
+//        }
 
     }
 
@@ -92,6 +92,9 @@ public class KReceiverActivity extends KRxJavaActivity implements KOnNetChangeLi
         }
         if (lockScreenBroadcastReceiver != null) {
             lockScreenBroadcastReceiver.onDestroy();
+        }
+        if (GpsDialog != null) {
+            GpsDialog.dismiss();
         }
     }
 
