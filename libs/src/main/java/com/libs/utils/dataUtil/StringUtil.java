@@ -18,14 +18,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.math.RoundingMode;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.text.NumberFormat.*;
 import static java.util.regex.Pattern.compile;
 
 
@@ -193,8 +196,21 @@ public class StringUtil {
      * @return
      */
     public static String getString(int in, double dd) {
+        //方法1：BigDecimal
+        // BigDecimal.ROUND_HALF_UP表示四舍五入、BigDecimal.ROUND_HALF_DOWN也是五舍六入、
+        // BigDecimal.ROUND_UP表示进位处理（就是直接加1）、BigDecimal.ROUND_DOWN表示直接去掉尾数
+//         return (new BigDecimal(dd)).setScale(in, BigDecimal.ROUND_DOWN).doubleValue()+"";
 
+        //方法2：DecimalFormat
+//        String pattern = "#.";
+//        for (int i = 0; i < in; i++) {
+//            pattern += "0";
+//        }
+//        return new DecimalFormat(pattern).format(dd);
+
+        //方法3：%.2f表示保留后两位，能四舍五入
         return String.format("%." + in + "f", dd);
+
     }
 
 //    /**

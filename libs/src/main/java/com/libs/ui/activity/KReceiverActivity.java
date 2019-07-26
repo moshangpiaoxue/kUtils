@@ -38,7 +38,7 @@ public class KReceiverActivity extends KRxJavaActivity implements KOnNetChangeLi
      * Gps开启状态
      */
     protected Boolean isOpenGps;
-    private IosAlertDialog GpsDialog;
+    protected IosAlertDialog mGpsDialog;
 
     /**
      * 锁屏监听
@@ -93,8 +93,8 @@ public class KReceiverActivity extends KRxJavaActivity implements KOnNetChangeLi
         if (lockScreenBroadcastReceiver != null) {
             lockScreenBroadcastReceiver.onDestroy();
         }
-        if (GpsDialog != null) {
-            GpsDialog.dismiss();
+        if (mGpsDialog != null) {
+            mGpsDialog.dismiss();
         }
     }
 
@@ -117,7 +117,7 @@ public class KReceiverActivity extends KRxJavaActivity implements KOnNetChangeLi
         isOpenGps = isOpen;
         LogUtil.i("定位功能开启状态==" + isOpen);
         if (!isOpen) {
-            GpsDialog = new IosAlertDialog(mActivity).builder()
+            mGpsDialog = new IosAlertDialog(mActivity).builder()
                     .setCancelable(false)
                     .setTitle("定位功能未开启")
                     .setMsg("请先打开GPS定位功能!")
@@ -130,10 +130,10 @@ public class KReceiverActivity extends KRxJavaActivity implements KOnNetChangeLi
                             mActivity.startActivityForResult(intent, 0);
                         }
                     });
-            GpsDialog.show();
+            mGpsDialog.show();
         } else {
-            if (GpsDialog != null) {
-                GpsDialog.dismiss();
+            if (mGpsDialog != null) {
+                mGpsDialog.dismiss();
             }
 
         }
