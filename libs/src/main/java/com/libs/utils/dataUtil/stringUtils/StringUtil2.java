@@ -5,23 +5,23 @@ package com.libs.utils.dataUtil.stringUtils;
  * @ data：2019/7/26:13:36
  * @ 功能：
  */
-public class StringUtils2 {
-    private volatile static StringUtils2 instance3;
+public class StringUtil2 {
+    private volatile static StringUtil2 instance;
 
     /**
      * 第三种用法：双重检查 **推荐使用-既不浪费内存，性能相对也比较高**
      * iOS的通用写法
      */
-    public static synchronized StringUtils2 getInstance3() {
-        if (instance3 == null) {
+    public static synchronized StringUtil2 getInstance() {
+        if (instance == null) {
             //给这个类加锁
-            synchronized (StringUtils2.class) {
-                if (instance3 == null) {
-                    instance3 = new StringUtils2();
+            synchronized (StringUtil2.class) {
+                if (instance == null) {
+                    instance = new StringUtil2();
                 }
             }
         }
-        return instance3;
+        return instance;
     }
     /**
      * 保留小数点后的几位
@@ -30,7 +30,7 @@ public class StringUtils2 {
      * @param dd double
      * @return
      */
-    public static String getString(int in, double dd) {
+    public   String getString(int in, double dd) {
         //方法1：BigDecimal
         // BigDecimal.ROUND_HALF_UP表示四舍五入、BigDecimal.ROUND_HALF_DOWN也是五舍六入、
         // BigDecimal.ROUND_UP表示进位处理（就是直接加1）、BigDecimal.ROUND_DOWN表示直接去掉尾数
