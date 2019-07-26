@@ -1,5 +1,7 @@
 package com.libs.utils.dataUtil.stringUtils;
 
+import java.math.BigDecimal;
+
 /**
  * @ author：mo
  * @ data：2019/7/26:13:36
@@ -34,7 +36,7 @@ public class StringUtil2 {
         //方法1：BigDecimal
         // BigDecimal.ROUND_HALF_UP表示四舍五入、BigDecimal.ROUND_HALF_DOWN也是五舍六入、
         // BigDecimal.ROUND_UP表示进位处理（就是直接加1）、BigDecimal.ROUND_DOWN表示直接去掉尾数
-//         return (new BigDecimal(dd)).setScale(in, BigDecimal.ROUND_DOWN).doubleValue()+"";
+         return (new BigDecimal(dd)).setScale(in, BigDecimal.ROUND_DOWN).doubleValue()+"";
 
         //方法2：DecimalFormat
 //        String pattern = "#.";
@@ -44,7 +46,7 @@ public class StringUtil2 {
 //        return new DecimalFormat(pattern).format(dd);
 
         //方法3：%.2f表示保留后两位，能四舍五入
-        return String.format("%." + in + "f", dd);
+//        return String.format("%." + in + "f", dd);
 
     }
 }
