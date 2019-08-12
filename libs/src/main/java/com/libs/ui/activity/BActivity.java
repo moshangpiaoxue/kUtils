@@ -1,8 +1,6 @@
 package com.libs.ui.activity;
 
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -195,6 +193,9 @@ public class BActivity extends AppCompatActivity {
         super.onDestroy();
         mThreadNameList = null;
         isRunning = false;
+//        if (RxBus.getDefault().hasSubscribers()) {
+//            RxBus.getDefault().unregisterAll();
+//        }
     }
 
     /**
