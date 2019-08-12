@@ -40,12 +40,6 @@ public class ContextUtil {
         return k.app().getPackageManager();
     }
 
-    /**
-     * 启动 Activity
-     */
-    public static void startActivity(Intent intent) {
-        k.app().startActivity(intent);
-    }
 
     /**
      * 获取系统服务

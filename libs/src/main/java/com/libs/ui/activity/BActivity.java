@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.libs.modle.manager.ThreadManager;
+import com.libs.utils.appUtils.AppInfoUtil;
 import com.libs.utils.logUtils.LogUtil;
 
 import java.util.ArrayList;
@@ -162,7 +163,7 @@ public class BActivity extends AppCompatActivity {
      */
     @Override
     protected void onStop() {
-        if (!isAppOnForeground()) {
+        if (!AppInfoUtil.isAppOnForeground()) {
             //app 进入后台
             isActive = false;//记录当前已经进入后台
 //            LogUtil.i("程序进入后台");
@@ -256,28 +257,4 @@ public class BActivity extends AppCompatActivity {
 //    }
 
 
-    /**
-     * APP是否处于前台唤醒状态
-     *
-     * @return
-     */
-    public boolean isAppOnForeground() {
-        ActivityManager activityManager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
-        String packageName = getApplicationContext().getPackageName();
-        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager
-                .getRunningAppProcesses();
-        if (appProcesses == null) {
-            return false;
-        }
-
-        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
-            // The name of the process that this object is associated with.
-            if (appProcess.processName.equals(packageName)
-                    && appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }

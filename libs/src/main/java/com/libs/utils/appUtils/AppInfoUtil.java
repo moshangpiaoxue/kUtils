@@ -355,13 +355,6 @@ public class AppInfoUtil {
     }
 
 
-    /**
-     * 判断当前 APP 是否正在前台运行 ,原理是判断 APP 是否处于栈顶, 屏幕是否关闭不会影响结果
-     */
-    @RequiresPermission(Manifest.permission.GET_TASKS)
-    public static boolean isAppOnForeground() {
-        return isAppOnForeground(getAppInfo().packageName);
-    }
 
     /**
      * 判断某应用程序(App)是否正在前台运行,原理是判断 APP 是否处于栈顶, 屏幕是否关闭不会影响结果
@@ -384,6 +377,30 @@ public class AppInfoUtil {
 //                }
 //            }
         }
+        return false;
+    }
+    /**
+     * APP是否处于前台唤醒状态
+     *
+     * @return
+     */
+    public static  boolean isAppOnForeground() {
+        ActivityManager activityManager = getActivityManager();
+        String packageName = ContextUtil.getPackageName();
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager
+                .getRunningAppProcesses();
+        if (appProcesses == null) {
+            return false;
+        }
+
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            // The name of the process that this object is associated with.
+            if (appProcess.processName.equals(packageName)
+                    && appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                return true;
+            }
+        }
+
         return false;
     }
 

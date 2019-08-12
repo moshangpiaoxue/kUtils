@@ -14,7 +14,7 @@ import android.view.TextureView;
 import android.view.ViewGroup;
 
 import com.libs.utils.logUtils.LogUtil;
-import com.libs.utils.task.threadPool.ThreadPoolUtil;
+import com.libs.utils.task.threadPool.ThreadPoolProxyFactory;
 
 import java.io.IOException;
 
@@ -363,7 +363,7 @@ public class KVideoTextureView extends TextureView {
    */
   public void stop() {
 
-    ThreadPoolUtil.runTaskInThread(new Runnable() {
+    ThreadPoolProxyFactory.getDefaultThreadPool().execute(new Runnable() {
       @Override public void run() {
         try {
 
