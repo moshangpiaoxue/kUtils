@@ -9,8 +9,19 @@ import org.json.JSONObject;
  * @ data：2019/2/13:13:57
  * @ 功能：对 JsonObject 的处理进行了封装
  */
-public class JsonObjectUtil {
-    private JsonObjectUtil() {
+public class JsonUtil {
+    private JsonUtil() {
+    }
+
+    /**
+     * 判断json格式是否正确
+     */
+    public static boolean isJsonCorrect(String s) {
+        if (s == null || s.equals("[]")
+                || s.equals("{}") || s.equals("") || s.equals("[null]") || s.equals("{null}") || s.equals("null")) {
+            return false;
+        }
+        return true;
     }
 
     public static JsonObjectBuilder parseJson(String json) {

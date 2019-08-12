@@ -7,11 +7,14 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Surface;
 import android.view.View;
@@ -20,7 +23,8 @@ import android.view.WindowManager;
 
 import com.libs.k;
 import com.libs.modle.constants.Limits;
-import com.libs.modle.manager.KWindowManager;
+import com.libs.utils.ResUtil;
+import com.libs.utils.logUtils.LogUtil;
 
 
 /**
@@ -37,39 +41,16 @@ public class ScreenUtil {
     }
 
     /**
-     * 设置状态栏、导航栏透明
-     *
-     * @param mActivity
+     * 窗口管理
      */
-    public static void setBarTransparent(Activity mActivity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            mActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-            mActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
+    public static WindowManager getWindowManager() {
+        return (WindowManager) k.app().getSystemService(Context.WINDOW_SERVICE);
     }
 
-    /**
-     * 第三种获取DisplayMetrics方法
-     *
-     * @param mActivity
-     * @return
-     */
-    public static DisplayMetrics getDisplayMetrics(Activity mActivity) {
-        DisplayMetrics dm = new DisplayMetrics();
-        mActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        return dm;
-    }
+    //////////////////////////////////////信息相关//////////////////////////////////////////////////////////////
 
     /**
-     * 得到屏幕逻辑密度 Density Independent Pixel（如3.0）
-     */
-    public static float getScreenDensity() {
-        return getDisplayMetrics().density;
-    }
-
-    /**
+     * 获取屏幕信息
      * DisplayMetrics   是Android提供的记述屏幕的有关信息的一种结构，诸如其尺寸，密度和字体缩放的一般信息。
      * <p></p>
      * int width = metrics.widthPixels;  // 表示屏幕的像素宽度，单位是px（像素）
@@ -83,7 +64,11 @@ public class ScreenUtil {
         DisplayMetrics dm;
         //第一种获取方法
         dm = k.app().getResources().getDisplayMetrics();
-        //第二种获取方法  弃用了
+        //第二种方法
+//        DisplayMetrics dm = new DisplayMetrics();
+//       getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        //第三种获取方法  弃用了
 //        dm = new DisplayMetrics();
 //        ((WindowManager) k.app().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
 
@@ -91,22 +76,187 @@ public class ScreenUtil {
     }
 
     /**
-     * 获取屏幕密度 DPI
-     * 整个屏幕的像素密度DPI（dots per inch每英寸像素数），可以是密度低,密度中等,或者密度高（如240/ 360 / 480）
+     * 获得屏幕宽度
      *
-     * @return 屏幕密度 DPI
+     * @ return 屏幕宽
      */
-    public static int getScreenDensityDpi() {
-        return getDisplayMetrics().densityDpi;
+    public static int getScreenWidth() {
+//        方法1
+        WindowManager windowManager = getWindowManager();
+        if (windowManager == null) {
+            return ResUtil.getResource().getDisplayMetrics().widthPixels;
+        }
+        int width = 0;
+        if (Build.VERSION.SDK_INT >= 16) {
+            Point point = new Point();
+            windowManager.getDefaultDisplay().getSize(point);
+            width = point.x;
+        } else {
+            width = windowManager.getDefaultDisplay().getWidth();
+        }
+        return width;
+//方法2
+//        WindowManager wm = getWindowManager();
+//        DisplayMetrics outMetrics = new DisplayMetrics();
+//        wm.getDefaultDisplay().getMetrics(outMetrics);
+//        return outMetrics.widthPixels;
+
+//        方法3
+//        WindowManager wm = getWindowManager();
+//        if (wm == null) {
+//            return k.app().getResources().getDisplayMetrics().widthPixels;
+//        }
+//        Point point = new Point();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            wm.getDefaultDisplay().getRealSize(point);
+//        } else {
+//            wm.getDefaultDisplay().getSize(point);
+//        }
+//        return point.x;
     }
 
     /**
-     * 设置屏幕为全屏
+     * 获得屏幕高度
+     *
+     * @ return 屏幕高
+     */
+    public static int getScreenHeight() {
+        //        方法1
+        WindowManager windowManager = getWindowManager();
+        if (windowManager == null) {
+            return ResUtil.getResource().getDisplayMetrics().heightPixels;
+        }
+        int hight = 0;
+        if (Build.VERSION.SDK_INT >= 16) {
+            Point point = new Point();
+            windowManager.getDefaultDisplay().getSize(point);
+            hight = point.y;
+        } else {
+            hight = windowManager.getDefaultDisplay().getHeight();
+        }
+        return hight;
+        //方法2
+//        DisplayMetrics outMetrics = new DisplayMetrics();
+//        KWindowManager.getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
+//        return outMetrics.heightPixels;
+
+        //        方法3
+//        WindowManager wm = KWindowManager.getWindowManager();
+//        if (wm == null) {
+//            return k.app().getResources().getDisplayMetrics().heightPixels;
+//        }
+//        Point point = new Point();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            wm.getDefaultDisplay().getRealSize(point);
+//        } else {
+//            wm.getDefaultDisplay().getSize(point);
+//        }
+//        return point.y;
+
+    }
+
+    /**
+     * 判断是否横屏
+     */
+    public static boolean isLandscape() {
+        return k.app().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
+    /**
+     * 判断是否竖屏
+     */
+    public static boolean isPortrait() {
+        return k.app().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+    }
+
+    //////////////////////////////////////操作相关//////////////////////////////////////////////////////////////
+
+
+    /**
+     * 设置屏幕方向
+     *
+     * @param activity             Activity
+     * @param requestedOrientation 方向
+     */
+    public static void setScreenOrientation(Activity activity, @Limits.ScreenOrientation int requestedOrientation) {
+        activity.setRequestedOrientation(requestedOrientation);
+    }
+
+    /**
+     * 设置屏幕为横屏
+     * <p>还有一种就是在Activity中加属性android:screenOrientation="landscape"</p>
+     * <p>不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次</p>
+     * <p>设置Activity的android:configChanges="orientation"时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次</p>
+     * <p>设置Activity的android:configChanges="orientation|keyboardHidden|screenSize"（4.0以上必须带最后一个参数）时
+     * 切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法</p>
+     *
+     * @param activity activity
+     */
+    public static void setScreenOrientationLandscape(Activity activity) {
+        setScreenOrientation(activity, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
+
+    /**
+     * 设置屏幕为竖屏
+     *
+     * @param activity activity
+     */
+    public static void setScreenOrientationPortrait(Activity activity) {
+        setScreenOrientation(activity, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    /**
+     * 设置状态栏、导航栏透明,营造沉浸式效果
+     *
+     * @param mActivity
+     */
+    public static void setBarTransparent(Activity mActivity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            mActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            mActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+    }
+
+    /**
+     * 设置窗口全屏显示（在setContentView（）之前调用）
      *
      * @param activity activity
      */
     public static void setFullScreen(@NonNull final Activity activity) {
-        KWindowManager.setFullScreen(activity);
+        try {
+            activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }catch (Exception e){
+            e.printStackTrace();
+            LogUtil.i("下面这个是原来使用的方法，要给布局设置setViewfits，先这么用，看效果");
+            Window window = activity.getWindow();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
+                    View decorView = window.getDecorView();
+                    //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
+                    int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+                    decorView.setSystemUiVisibility(option);
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(Color.TRANSPARENT);
+                    //导航栏颜色也可以正常设置
+//                    if (isNavigation) {
+                    window.setNavigationBarColor(Color.TRANSPARENT);
+//                    }
+                } else {
+                    WindowManager.LayoutParams attributes = window.getAttributes();
+                    int flagTranslucentStatus = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+                    int flagTranslucentNavigation = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+                    attributes.flags |= flagTranslucentStatus;
+//                    if (isNavigation) {
+                    attributes.flags |= flagTranslucentNavigation;
+//                    }
+                    window.setAttributes(attributes);
+                }
+            }
+        }
     }
 
     /**
@@ -129,61 +279,6 @@ public class ScreenUtil {
 
     }
 
-    /**
-     * 获得屏幕宽度
-     *
-     * @return
-     */
-    public static int getScreenWidth() {
-//        方法1
-        return KWindowManager.getScreenWidth();
-//方法2
-//        WindowManager wm = KWindowManager.getWindowManager();
-//        DisplayMetrics outMetrics = new DisplayMetrics();
-//        wm.getDefaultDisplay().getMetrics(outMetrics);
-//        return outMetrics.widthPixels;
-
-//        方法3
-//        WindowManager wm = KWindowManager.getWindowManager();
-//        if (wm == null) {
-//            return k.app().getResources().getDisplayMetrics().widthPixels;
-//        }
-//        Point point = new Point();
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            wm.getDefaultDisplay().getRealSize(point);
-//        } else {
-//            wm.getDefaultDisplay().getSize(point);
-//        }
-//        return point.x;
-    }
-
-    /**
-     * 获得屏幕宽度
-     *
-     * @return
-     */
-    public static int getScreenHeight() {
-        //        方法1
-        return KWindowManager.getScreenHeight();
-        //方法2
-//        DisplayMetrics outMetrics = new DisplayMetrics();
-//        KWindowManager.getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
-//        return outMetrics.heightPixels;
-
-        //        方法3
-//        WindowManager wm = KWindowManager.getWindowManager();
-//        if (wm == null) {
-//            return k.app().getResources().getDisplayMetrics().heightPixels;
-//        }
-//        Point point = new Point();
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            wm.getDefaultDisplay().getRealSize(point);
-//        } else {
-//            wm.getDefaultDisplay().getSize(point);
-//        }
-//        return point.y;
-
-    }
 
     /**
      * 获取当前屏幕截图，不包含状态栏
@@ -241,58 +336,6 @@ public class ScreenUtil {
         return ret;
     }
 
-    /**
-     * 设置屏幕方向
-     *
-     * @param activity             Activity
-     * @param requestedOrientation 方向
-     */
-    public static void setScreenOrientation(Activity activity, @Limits.ScreenOrientation int requestedOrientation) {
-        activity.setRequestedOrientation(requestedOrientation);
-    }
-
-    /**
-     * 设置屏幕为横屏
-     * <p>还有一种就是在Activity中加属性android:screenOrientation="landscape"</p>
-     * <p>不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次</p>
-     * <p>设置Activity的android:configChanges="orientation"时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次</p>
-     * <p>设置Activity的android:configChanges="orientation|keyboardHidden|screenSize"（4.0以上必须带最后一个参数）时
-     * 切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法</p>
-     *
-     * @param activity activity
-     */
-    public static void setScreenOrientationLandscape(Activity activity) {
-        setScreenOrientation(activity, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-    }
-
-    /**
-     * 设置屏幕为竖屏
-     *
-     * @param activity activity
-     */
-    public static void setScreenOrientationPortrait(Activity activity) {
-        setScreenOrientation(activity, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
-
-    /**
-     * 判断是否横屏
-     *
-     * @param context 上下文
-     * @return {@code true}: 是<br>{@code false}: 否
-     */
-    public static boolean isLandscape(Context context) {
-        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-    }
-
-    /**
-     * 判断是否竖屏
-     *
-     * @param context 上下文
-     * @return {@code true}: 是<br>{@code false}: 否
-     */
-    public static boolean isPortrait(Context context) {
-        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-    }
 
     /**
      * 获取屏幕旋转角度
@@ -318,12 +361,9 @@ public class ScreenUtil {
 
     /**
      * 判断是否锁屏
-     *
-     * @param context 上下文
-     * @return {@code true}: 是<br>{@code false}: 否
      */
-    public static boolean isScreenLock(Context context) {
-        KeyguardManager km = (KeyguardManager) context
+    public static boolean isScreenLock() {
+        KeyguardManager km = (KeyguardManager) k.app()
                 .getSystemService(Context.KEYGUARD_SERVICE);
         return km.inKeyguardRestrictedInputMode();
     }

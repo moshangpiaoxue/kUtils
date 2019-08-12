@@ -6,8 +6,8 @@ import android.content.Context;
 import com.libs.modle.annotation.ViewInjector;
 import com.libs.modle.annotation.ViewInjectorImpl;
 import com.libs.utils.appUtils.activityUtil.ActivitysUtil;
-import com.libs.utils.task.KTaskController;
-import com.libs.utils.task.KTaskControllerImpl;
+import com.libs.utils.task.control.KTaskController;
+import com.libs.utils.task.control.KTaskControllerImpl;
 
 import java.lang.reflect.Method;
 

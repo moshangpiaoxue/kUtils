@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="KArcMenu">
+        //控件位于内部的位置
+        <attr name="kam_position">
+            <enum name="left_top" value="0" />
+            <enum name="left_bottom" value="1" />
+            <enum name="right_top" value="2" />
+            <enum name="right_bottom" value="3" />
+        </attr>
+        //半径
+        <attr name="kam_radius" format="dimension" />
+    </declare-styleable>
+</resources>

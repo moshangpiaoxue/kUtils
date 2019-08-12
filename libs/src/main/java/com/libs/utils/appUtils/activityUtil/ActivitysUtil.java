@@ -11,8 +11,8 @@ import com.libs.k;
 import com.libs.modle.listener.KActivityLifecycleCallbacks;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 import java.util.Stack;
-
 
 
 /**
@@ -21,6 +21,8 @@ import java.util.Stack;
  * date: 2017/9/15 0015 10:02
  */
 public class ActivitysUtil {
+
+
     private static Stack<Activity> activityStack;
     private static WeakReference<Activity> sTopActivityWeakRef;
 
@@ -69,7 +71,17 @@ public class ActivitysUtil {
     public static WeakReference<Activity> getTopActivity() {
         return sTopActivityWeakRef;
     }
-
+    /**
+     * 获取顶层 Activity
+     *
+     * @return
+     */
+    public static String getTopActivity2() {
+        ActivityManager manager = (ActivityManager) k.app().getSystemService(Context.ACTIVITY_SERVICE);
+        @SuppressWarnings("deprecation")
+        List<ActivityManager.RunningTaskInfo> runningTaskInfos = manager.getRunningTasks(1);
+        return runningTaskInfos == null ? "" : runningTaskInfos.get(0).topActivity.getClassName();
+    }
     /**
      * 添加Activity 到栈
      *
@@ -109,6 +121,7 @@ public class ActivitysUtil {
             }
         }
     }
+
     /**
      * 结束指定类名以外的其他所有Activity
      *
@@ -121,6 +134,7 @@ public class ActivitysUtil {
             }
         }
     }
+
     /**
      * 结束所有的Activity、
      */

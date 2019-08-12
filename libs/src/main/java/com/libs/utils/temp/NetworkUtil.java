@@ -23,8 +23,6 @@ import java.util.Enumeration;
  * @ 功能：
  */
 public class NetworkUtil {
-    private NetworkUtil() {
-    }
 
 
     /**
@@ -96,7 +94,7 @@ public class NetworkUtil {
      * @return 是否打开
      */
     public static boolean isWifiEnabled() {
-        WifiManager wifiManager = (WifiManager)  k.app().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager)k.app().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         return wifiManager.isWifiEnabled();
     }
 

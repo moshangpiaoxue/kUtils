@@ -13,31 +13,26 @@ import com.libs.k;
  * @ data：2019/1/10：14:44
  * @ 功能：剪贴板工具类
  */
-public enum ClipboardUtil {
-
-    /**
-     * 枚举单例
-     */
-    INSTANCE;
+public class ClipboardUtil {
 
     /**
      * 判断版本
      */
-    private Boolean isNew() {
+    private static Boolean isNew() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
     }
 
     /**
      * 获取剪贴板管理器
      */
-    private ClipboardManager getClipboardManager() {
+    private static ClipboardManager getClipboardManager() {
         return (ClipboardManager) k.app().getSystemService(Context.CLIPBOARD_SERVICE);
     }
 
     /**
      * 填充剪贴板数据
      */
-    public void setText(String text) {
+    public static void setText(String text) {
         if (isNew()) {
             getClipboardManager().setPrimaryClip(ClipData.newPlainText("Label", text));
         } else {
@@ -48,7 +43,7 @@ public enum ClipboardUtil {
     /**
      * 获取剪贴板数据
      */
-    public String getText() {
+    public static String getText() {
         StringBuilder stringBuilder = new StringBuilder();
         if (isNew()) {
             if (!getClipboardManager().hasPrimaryClip()) {
