@@ -8,7 +8,6 @@ import android.os.Looper;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
-import cn.bingoogolapple.swipebacklayout.BGASwipeBackManager;
 
 /**
  * author：mo
@@ -110,12 +109,6 @@ public class KApplication extends MultiDexApplication {
     }
 
 
-    /**
-     * 开启右滑关闭页面功能
-     */
-    public void actionSwipeBack() {
-        BGASwipeBackManager.getInstance().init(this);
-    }
 
     /**
      * 监听程序前后台切换
