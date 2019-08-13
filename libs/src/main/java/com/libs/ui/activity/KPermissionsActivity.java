@@ -15,7 +15,7 @@ import java.util.List;
  * @ data：2018/7/13：15:19
  * @ 功能：权限管理activity基类
  */
-public class KPermissionsActivity extends KSlidingCloseActivity {
+public class KPermissionsActivity extends BActivity {
 //    private String[] permissions;
     /**
      * 权限申请结果识别码

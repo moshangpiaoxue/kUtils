@@ -56,15 +56,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    //v7包
     api 'com.android.support:appcompat-v7:28.0.0'
     api 'com.android.support:support-annotations:28.0.0'
-    //65536
-    api 'com.android.support:multidex:1.0.3'
     //recyclerview
     api 'com.android.support:recyclerview-v7:28.0.0'
-    // Activity右滑退出的效果
-    api 'cn.bingoogolapple:bga-swipebacklayout:1.1.1@aar'
     //吐司
     api 'com.github.Blincheng:EToast2:v2.2.1'
 
