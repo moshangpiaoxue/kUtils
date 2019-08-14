@@ -158,12 +158,10 @@ public class SratusBarUtil {
      * @param drawable
      */
     public static void setStatusBar(Activity activity, Drawable drawable) {
-        LogUtil.i("Build.VERSION.SDK_INT==" + Build.VERSION.SDK_INT);
-
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            LogUtil.i("Build.VERSION.SDK_INT==" + Build.VERSION.SDK_INT+"版本太低，不支持");
             return;
         }
-
         transparentStatusBar(activity);
         ViewUtil.setViewfits(activity, true);
         setStatusBar(activity, true);

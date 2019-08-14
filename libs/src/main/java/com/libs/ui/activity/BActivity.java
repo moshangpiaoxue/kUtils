@@ -1,9 +1,11 @@
 package com.libs.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -59,6 +61,23 @@ public class BActivity extends AppCompatActivity {
      */
     protected List<String> mThreadNameList;
 
+    /**
+     *
+     * 省的每页写，不喜欢每次创建，抽出来
+     */
+    @SuppressLint("HandlerLeak")
+    protected Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            onHandlerMessage(msg.arg1,msg.arg2,msg.obj,msg);
+        }
+    };
+
+    protected void onHandlerMessage(int arg1, int arg2, Object obj, Message msg) {
+
+
+    }
 
     /**
      * 1、当launchMode为singleTask的时候，如果这个界面处于栈顶也就是他正在显示的时候，使用intent跳转到这个界面想要刷新数据的时候，会没有反应，这个时候就要用到这个方法去接收数据

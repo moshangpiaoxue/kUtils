@@ -66,7 +66,7 @@ public class KReceiverActivity extends KPermissionsActivity implements KOnNetCha
      */
     protected void actionGpsListener() {
         gpsBroadcastReceiver = new GPSBroadcastReceiver(this);
-        onGpsStatusChange(KLocationManager.INSTANCE.isOpen());
+//        onGpsStatusChange(KLocationManager.INSTANCE.isOpen());
     }
 
     @Override
