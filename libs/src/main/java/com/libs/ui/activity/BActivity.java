@@ -73,29 +73,11 @@ public class BActivity extends AppCompatActivity {
             onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
         }
     };
-//    protected MyHandler myHandler;
 
-//    private static class MyHandler extends Handler {
-//        private WeakReference<Activity> mWeakReference;
-//
-//        public MyHandler(Activity activity) {
-//            mWeakReference = new WeakReference<>(activity);
-//        }
-//
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            Activity mainActivity = mWeakReference.get();
-//            if (mainActivity != null) {
-//                onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
-//            }
-//        }
-//    }
-
-    protected  void onHandlerMessage(int arg1, int arg2, Object obj, Message msg) {
-
+    protected void onHandlerMessage(int arg1, int arg2, Object obj, Message msg) {
 
     }
+
 
     /**
      * 1、当launchMode为singleTask的时候，如果这个界面处于栈顶也就是他正在显示的时候，使用intent跳转到这个界面想要刷新数据的时候，会没有反应，这个时候就要用到这个方法去接收数据
@@ -296,5 +278,21 @@ public class BActivity extends AppCompatActivity {
 //        super.startActivityForResult(intent, requestCode);
 //    }
 
-
+//    protected MyHandler myHandler;
+//    private static class MyHandler extends Handler {
+//        private WeakReference<Activity> mWeakReference;
+//
+//        public MyHandler(Activity activity) {
+//            mWeakReference = new WeakReference<>(activity);
+//        }
+//
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            Activity mainActivity = mWeakReference.get();
+//            if (mainActivity != null) {
+//                onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
+//            }
+//        }
+//    }
 }
