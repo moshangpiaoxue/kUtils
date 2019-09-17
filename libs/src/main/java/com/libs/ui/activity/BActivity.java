@@ -70,32 +70,29 @@ public class BActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (mActivity!=null){
-                onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
-            }
-
+            onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
         }
     };
-//    protected MyHandler myHandler;
-//
-//    private static class MyHandler extends Handler {
-//        private WeakReference<Activity> mWeakReference;
-//
-//        public MyHandler(Activity activity) {
-//            mWeakReference = new WeakReference<>(activity);
-//        }
-//
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            Activity mainActivity = mWeakReference.get();
-//            if (mainActivity != null) {
-//                onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
-//            }
-//        }
-//    }
+    protected MyHandler myHandler;
 
-    protected  void onHandlerMessage(int arg1, int arg2, Object obj, Message msg) {
+    private static class MyHandler extends Handler {
+        private WeakReference<Activity> mWeakReference;
+
+        public MyHandler(Activity activity) {
+            mWeakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Activity mainActivity = mWeakReference.get();
+            if (mainActivity != null) {
+                onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
+            }
+        }
+    }
+
+    protected static void onHandlerMessage(int arg1, int arg2, Object obj, Message msg) {
 
 
     }
@@ -127,7 +124,7 @@ public class BActivity extends AppCompatActivity {
         mIntent = getIntent();
         isRunning = true;
         mThreadNameList = new ArrayList<String>();
-//        myHandler = new MyHandler(mActivity);
+        myHandler = new MyHandler(mActivity);
     }
 
     /**
@@ -237,8 +234,7 @@ public class BActivity extends AppCompatActivity {
 //        if (RxBus.getDefault().hasSubscribers()) {
 //            RxBus.getDefault().unregisterAll();
 //        }
-//        myHandler.removeCallbacksAndMessages(null);
-        mHandler.removeCallbacksAndMessages(null);
+        myHandler.removeCallbacksAndMessages(null);
     }
 
     /**
