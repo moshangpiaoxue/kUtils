@@ -48,7 +48,6 @@ public abstract class KBaseActivity extends KMediaActivity {
      * 系统返回键是否起作用
      */
     protected Boolean isCanBack = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

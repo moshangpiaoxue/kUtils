@@ -29,6 +29,7 @@ import com.libs.utils.logUtils.LogUtil;
  * 2、控件宽高必须一样
  */
 public class KSlantedTextView extends View {
+
     private void demo(KSlantedTextView stv) {
         //java
         stv.setText("AAA")
