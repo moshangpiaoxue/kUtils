@@ -22,9 +22,9 @@ import android.widget.TextView;
 import com.libs.KApplication;
 import com.libs.utils.ResUtil;
 import com.libs.utils.dataUtil.StringUtil;
-import com.libs.utils.dataUtil.dealUtil.ColorUtils;
+import com.libs.utils.colorsUtils.ColorUtils;
 import com.libs.utils.logUtils.LogUtil;
-import com.libs.utils.task.HandlerUtil;
+import com.libs.utils.task.handlers.HandlerUtil;
 
 import java.util.Arrays;
 
@@ -332,18 +332,17 @@ public class ViewUtil {
      *
      * @param activity   载体
      * @param color      颜色
-     * @param alpha      透明度
      * @param viewId     id
      * @param viewHeight 高度
      * @param viewWidth  宽度
      * @return
      */
-    public static View getView(Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int alpha, int viewId, int viewHeight, int viewWidth) {
+    public static View getView(Activity activity, @ColorInt int color, int viewId, int viewHeight, int viewWidth) {
         // 绘制一个和状态栏一样高的矩形
         View view = new View(activity);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewHeight, viewWidth);
         view.setLayoutParams(params);
-        view.setBackgroundColor(color == 0 ? ResUtil.getColor("#FFFFFF") : ColorUtils.getColor(color, alpha));
+        view.setBackgroundColor(color == 0 ? ResUtil.getColor("#FFFFFF") : color);
         view.setId(viewId);
         return view;
     }

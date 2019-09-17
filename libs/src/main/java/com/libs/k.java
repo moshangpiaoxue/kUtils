@@ -79,15 +79,6 @@ public final class k {
 
         private Ext() {
         }
-
-
-
-
-
-
-
-
-
         public static void init(Application app) {
             KTaskControllerImpl.registerInstance();
             if (Ext.app == null) {

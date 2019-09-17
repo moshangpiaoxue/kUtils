@@ -1,4 +1,4 @@
-package com.libs.modle.service;
+package com.libs.service;
 
 /**
  * @ author：mo

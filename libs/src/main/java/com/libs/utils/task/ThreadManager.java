@@ -12,10 +12,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.*/
 
-package com.libs.modle.manager;
+package com.libs.utils.task;
 
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Process;
 import android.util.Log;
 
 import com.libs.utils.dataUtil.StringUtil;
@@ -51,12 +52,30 @@ public class ThreadManager {
         return instance;
     }
 
+    /**
+     * 获取当前线程名
+     *
+     * @return 当前线程名
+     */
+    public static String getCurrentThreadName() {
+        return Thread.currentThread().getName();
+    }
+
+    /**
+     * 判断是否为主线程
+     *
+     * @param tid 当前线程的 thread id
+     * @return true 是; false 不是
+     */
+    public static boolean isMainThread(int tid) {
+        return Process.myTid() == tid;
+    }
 
     /**
      * 运行线程
      *
-     * @param name  叫啥
-     * @param runnable      干啥
+     * @param name     叫啥
+     * @param runnable 干啥
      * @return
      */
     public Handler runThread(String name, Runnable runnable) {

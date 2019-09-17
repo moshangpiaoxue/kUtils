@@ -16,13 +16,12 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.libs.utils.ResUtil;
-import com.libs.utils.dataUtil.dealUtil.ColorUtils;
+import com.libs.utils.colorsUtils.ColorUtils;
 import com.libs.utils.logUtils.LogUtil;
 import com.libs.utils.viewUtil.ViewUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-
 
 
 /**
@@ -115,27 +114,15 @@ public class SratusBarUtil {
 
 
     /**
-     * 设置状态栏
+     * 设置状态栏背景颜色
      *
-     * @param activity       载体
-     * @param color          颜色值；0==不对状态栏进行颜色上的设置，默认为白色的效果
-     * @param statusBarAlpha 透明度；0==完全透明 255=完全不透明，黑色了
+     * @param activity 载体
+     * @param color    颜色值
      */
-    public static void setStatusBar(Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {
-        LogUtil.i("Build.VERSION.SDK_INT==" + Build.VERSION.SDK_INT);
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+    public static void setStatusBar(Activity activity, @ColorInt int color) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT | color == 0) {
             return;
         }
-        int backgroundColor = 0;
-        if (color == 0 && statusBarAlpha != 0) {
-            backgroundColor = Color.argb(statusBarAlpha, 0, 0, 0);
-        } else if (color != 0 && statusBarAlpha == 0) {
-            backgroundColor = ResUtil.getColor("#FFFFFF");
-        } else {
-            backgroundColor = ColorUtils.getColor(color, statusBarAlpha);
-        }
-
         transparentStatusBar(activity);
         ViewUtil.setViewfits(activity, true);
         setStatusBar(activity, true);
@@ -145,9 +132,9 @@ public class SratusBarUtil {
             if (fakeStatusBarView.getVisibility() == View.GONE) {
                 fakeStatusBarView.setVisibility(View.VISIBLE);
             }
-            fakeStatusBarView.setBackgroundColor(backgroundColor);
+            fakeStatusBarView.setBackgroundColor(color);
         } else {
-            decorView.addView(ViewUtil.getView(activity, backgroundColor, statusBarAlpha, FAKE_STATUS_BAR_VIEW_ID, LinearLayout.LayoutParams.MATCH_PARENT, getStatusBarHeight()));
+            decorView.addView(ViewUtil.getView(activity, color, FAKE_STATUS_BAR_VIEW_ID, LinearLayout.LayoutParams.MATCH_PARENT, getStatusBarHeight()));
         }
     }
 
@@ -159,7 +146,7 @@ public class SratusBarUtil {
      */
     public static void setStatusBar(Activity activity, Drawable drawable) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            LogUtil.i("Build.VERSION.SDK_INT==" + Build.VERSION.SDK_INT+"版本太低，不支持");
+            LogUtil.i("Build.VERSION.SDK_INT==" + Build.VERSION.SDK_INT + "版本太低，不支持");
             return;
         }
         transparentStatusBar(activity);
@@ -182,9 +169,8 @@ public class SratusBarUtil {
      *
      * @param activity       需要设置的activity
      * @param color          状态栏颜色值
-     * @param statusBarAlpha 状态栏透明度
      */
-    public static void setStatusBarColorForSwipeBack(Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {
+    public static void setStatusBarColorForSwipeBack(Activity activity, @ColorInt int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
             ViewGroup contentView = ((ViewGroup) activity.findViewById(android.R.id.content));
@@ -194,7 +180,7 @@ public class SratusBarUtil {
                 final CoordinatorLayout coordinatorLayout = (CoordinatorLayout) rootView;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                     coordinatorLayout.setFitsSystemWindows(false);
-                    contentView.setBackgroundColor(ColorUtils.getColor(color, statusBarAlpha));
+                    contentView.setBackgroundColor(color);
                     boolean isNeedRequestLayout = contentView.getPaddingTop() < statusBarHeight;
                     if (isNeedRequestLayout) {
                         contentView.setPadding(0, statusBarHeight, 0, 0);
@@ -206,11 +192,11 @@ public class SratusBarUtil {
                         });
                     }
                 } else {
-                    coordinatorLayout.setStatusBarBackgroundColor(ColorUtils.getColor(color, statusBarAlpha));
+                    coordinatorLayout.setStatusBarBackgroundColor(color);
                 }
             } else {
                 contentView.setPadding(0, statusBarHeight, 0, 0);
-                contentView.setBackgroundColor(ColorUtils.getColor(color, statusBarAlpha));
+                contentView.setBackgroundColor(color);
             }
             setTransparentForWindow(activity);
         }
@@ -342,7 +328,7 @@ public class SratusBarUtil {
             }
             fakeTranslucentView.setBackgroundColor(Color.argb(statusBarAlpha, 0, 0, 0));
         } else {
-            contentView.addView(ViewUtil.getView(activity, 0, statusBarAlpha, FAKE_STATUS_BAR_VIEW_ID, LinearLayout.LayoutParams.MATCH_PARENT, getStatusBarHeight()));
+            contentView.addView(ViewUtil.getView(activity, 0, FAKE_STATUS_BAR_VIEW_ID, LinearLayout.LayoutParams.MATCH_PARENT, getStatusBarHeight()));
         }
     }
 

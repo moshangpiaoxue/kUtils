@@ -21,14 +21,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-// 指定编码
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
-    }
-//编译groovy代码时采用 UTF-8
-    tasks.withType(GroovyCompile) {
-        groovyOptions.encoding = "MacRoman"
-    }
+//// 指定编码
+//    tasks.withType(JavaCompile) {
+//        options.encoding = "UTF-8"
+//    }
+////编译groovy代码时采用 UTF-8
+//    tasks.withType(GroovyCompile) {
+//        groovyOptions.encoding = "MacRoman"
+//    }
 
 // 打包源码
     task sourcesJar(type: Jar) {
@@ -52,6 +52,15 @@ android {
         archives sourcesJar
         archives javadocJar
     }
+    javadoc {
+        options {
+            //如果你的项目里面有中文注释的话，必须将格式设置为UTF-8，不然会出现乱码
+            encoding "UTF-8"
+            charSet 'UTF-8'
+            author true
+            version true
+        }
+    }
 }
 
 dependencies {
@@ -65,5 +74,6 @@ dependencies {
     api 'com.android.support:recyclerview-v7:28.0.0'
     //吐司
     api 'com.github.Blincheng:EToast2:v2.2.1'
+
 
 }

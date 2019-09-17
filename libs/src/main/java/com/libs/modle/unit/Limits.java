@@ -1,15 +1,11 @@
-package com.libs.modle.constants;
+package com.libs.modle.unit;
 
 import android.content.pm.ActivityInfo;
 import android.support.annotation.IntDef;
 
-import com.libs.utils.fileUtil.FileSize;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-
-import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
  * @ author：mo
@@ -49,11 +45,21 @@ public class Limits {
     @Retention(RetentionPolicy.SOURCE)
     public @interface ScreenOrientation {
     }
+
     /**
-    * 文件大小的单位
-    */
-    @Retention(SOURCE)
+     * 文件大小的单位
+     */
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef({FileSize.B, FileSize.KB, FileSize.MB, FileSize.GB})
     public @interface FileSizeDef {
     }
+
+    /**
+     * 时间转换单位倍数
+     */
+    @IntDef({TimeUnit.MSEC, TimeUnit.SEC, TimeUnit.MIN, TimeUnit.HOUR, TimeUnit.DAY})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface UnitMS {
+    }
+
 }

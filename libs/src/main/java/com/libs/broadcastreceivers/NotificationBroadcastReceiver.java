@@ -1,4 +1,4 @@
-package com.libs.modle.broadcastreceivers;
+package com.libs.broadcastreceivers;
 
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;

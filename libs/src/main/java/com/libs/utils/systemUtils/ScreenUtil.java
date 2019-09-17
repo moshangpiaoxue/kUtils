@@ -1,5 +1,6 @@
 package com.libs.utils.systemUtils;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -8,13 +9,11 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Surface;
 import android.view.View;
@@ -22,15 +21,14 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.libs.k;
-import com.libs.modle.constants.Limits;
-import com.libs.utils.ResUtil;
+import com.libs.modle.unit.Limits;
 import com.libs.utils.logUtils.LogUtil;
 
 
 /**
- * @description: 屏幕相关工具类
- * @author: mo
- * @date: 2018/1/8 0008 17:26
+ * @ description: 屏幕相关工具类
+ * @ author: mo
+ * @ date: 2018/1/8 0008 17:26
  */
 
 public class ScreenUtil {
@@ -82,19 +80,19 @@ public class ScreenUtil {
      */
     public static int getScreenWidth() {
 //        方法1
-        WindowManager windowManager = getWindowManager();
-        if (windowManager == null) {
-            return ResUtil.getResource().getDisplayMetrics().widthPixels;
-        }
-        int width = 0;
-        if (Build.VERSION.SDK_INT >= 16) {
-            Point point = new Point();
-            windowManager.getDefaultDisplay().getSize(point);
-            width = point.x;
-        } else {
-            width = windowManager.getDefaultDisplay().getWidth();
-        }
-        return width;
+//        WindowManager windowManager = getWindowManager();
+//        if (windowManager == null) {
+//            return ResUtil.getResource().getDisplayMetrics().widthPixels;
+//        }
+//        int width = 0;
+//        if (Build.VERSION.SDK_INT >= 16) {
+//            Point point = new Point();
+//            windowManager.getDefaultDisplay().getSize(point);
+//            width = point.x;
+//        } else {
+//            width = windowManager.getDefaultDisplay().getWidth();
+//        }
+//        return width;
 //方法2
 //        WindowManager wm = getWindowManager();
 //        DisplayMetrics outMetrics = new DisplayMetrics();
@@ -113,6 +111,8 @@ public class ScreenUtil {
 //            wm.getDefaultDisplay().getSize(point);
 //        }
 //        return point.x;
+        //        方法4
+        return getDisplayMetrics().widthPixels;
     }
 
     /**
@@ -122,19 +122,19 @@ public class ScreenUtil {
      */
     public static int getScreenHeight() {
         //        方法1
-        WindowManager windowManager = getWindowManager();
-        if (windowManager == null) {
-            return ResUtil.getResource().getDisplayMetrics().heightPixels;
-        }
-        int hight = 0;
-        if (Build.VERSION.SDK_INT >= 16) {
-            Point point = new Point();
-            windowManager.getDefaultDisplay().getSize(point);
-            hight = point.y;
-        } else {
-            hight = windowManager.getDefaultDisplay().getHeight();
-        }
-        return hight;
+//        WindowManager windowManager = getWindowManager();
+//        if (windowManager == null) {
+//            return ResUtil.getResource().getDisplayMetrics().heightPixels;
+//        }
+//        int hight = 0;
+//        if (Build.VERSION.SDK_INT >= 16) {
+//            Point point = new Point();
+//            windowManager.getDefaultDisplay().getSize(point);
+//            hight = point.y;
+//        } else {
+//            hight = windowManager.getDefaultDisplay().getHeight();
+//        }
+//        return hight;
         //方法2
 //        DisplayMetrics outMetrics = new DisplayMetrics();
 //        KWindowManager.getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
@@ -152,7 +152,26 @@ public class ScreenUtil {
 //            wm.getDefaultDisplay().getSize(point);
 //        }
 //        return point.y;
-
+//        方法4
+        int screenHeight = getDisplayMetrics().heightPixels;
+        if(DeviceUtil.isXiaomi() && xiaomiNavigationGestureEnabled()){
+            screenHeight += getResourceNavHeight();
+        }
+        return getDisplayMetrics().heightPixels;
+    }
+    private static final String XIAOMI_FULLSCREEN_GESTURE = "force_fsg_nav_bar";
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static boolean xiaomiNavigationGestureEnabled() {
+        int val = Settings.Global.getInt(k.app().getContentResolver(), XIAOMI_FULLSCREEN_GESTURE, 0);
+        return val != 0;
+    }
+    private static int getResourceNavHeight(){
+        // 小米4没有nav bar, 而 navigation_bar_height 有值
+        int resourceId = k.app().getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return k.app().getResources().getDimensionPixelSize(resourceId);
+        }
+        return -1;
     }
 
     /**
@@ -228,7 +247,7 @@ public class ScreenUtil {
         try {
             activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             LogUtil.i("下面这个是原来使用的方法，要给布局设置setViewfits，先这么用，看效果");
             Window window = activity.getWindow();

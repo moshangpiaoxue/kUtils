@@ -3,15 +3,20 @@ package com.libs.utils.systemUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Build;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.libs.k;
 
 import java.lang.reflect.Field;
-
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 
 /**
@@ -22,6 +27,107 @@ import java.lang.reflect.Field;
 
 public class KeyBordUtil {
     private static int sContentViewInvisibleHeightPre;
+
+    /**
+     * 获取输入法管理器
+     */
+    public static InputMethodManager getInputMethodManager() {
+        return (InputMethodManager) k.app().getSystemService(Context.INPUT_METHOD_SERVICE);
+    }
+
+    public static void isShowKeybord(final Activity activity, Boolean isShow) {
+        isShowKeybord(activity, null, isShow);
+    }
+
+    public static void isShowKeybord(View v, Boolean isShow) {
+        isShowKeybord(null, v, isShow);
+    }
+
+    /**
+     * 设置输入法显示状态
+     *
+     * @param activity 当前活动
+     * @param view     关联view 一般为editview
+     * @param isShow   是否显示
+     * @ 避免输入法面板遮挡
+     * <p>在 manifest.xml 中 activity 中设置</p>
+     * <p>android:windowSoftInputMode="adjustPan"</p>
+     */
+    public static void isShowKeybord(final Activity activity, View view, Boolean isShow) {
+        InputMethodManager imm = getInputMethodManager();
+        if (imm == null) {
+            return;
+        }
+        if (view == null && activity == null) {
+            return;
+        }
+        if (isShow) {
+//            v.setFocusable(true);
+//            v.setFocusableInTouchMode(true);
+//            v.requestFocus();
+            imm.showSoftInput(view != null ? view : activity.getWindow().getDecorView(), InputMethodManager.SHOW_FORCED);
+        } else {
+            imm.hideSoftInputFromWindow((view != null ? view : activity.getWindow().getDecorView()).getWindowToken(), 0);
+        }
+    }
+
+    /**
+     * 禁掉系统软键盘
+     */
+    public static void hideSoftInputMethod(Activity activity, EditText editText) {
+        activity.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        int currentVersion = Build.VERSION.SDK_INT;
+        String methodName = null;
+        if (currentVersion >= 16) {
+            // 4.2
+            methodName = "setShowSoftInputOnFocus";
+        } else if (currentVersion >= 14) {
+            // 4.0
+
+            methodName = "setSoftInputShownOnFocus";
+        }
+        if (methodName == null) {
+            editText.setInputType(InputType.TYPE_NULL);
+        } else {
+            Class<EditText> cls = EditText.class;
+            Method setShowSoftInputOnFocus;
+            try {
+                setShowSoftInputOnFocus = cls.getMethod(methodName,
+                        boolean.class);
+                setShowSoftInputOnFocus.setAccessible(true);
+                setShowSoftInputOnFocus.invoke(editText, false);
+            } catch (NoSuchMethodException e) {
+                editText.setInputType(InputType.TYPE_NULL);
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 打开软键盘
@@ -42,6 +148,9 @@ public class KeyBordUtil {
                 imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
+//        InputMethodManager imm = (InputMethodManager) v.getContext().getApplicationContext()
+//                .getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.showSoftInput(v, InputMethodManager.SHOW_IMPLICIT);
         //第二种
 //        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
 //        imm.showSoftInput(v, InputMethodManager.RESULT_SHOWN);
@@ -113,9 +222,14 @@ public class KeyBordUtil {
      * @param view 任意view
      */
     public static void closeKeybord(View view) {
-        InputMethodManager imm = (InputMethodManager) k.app().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        if (null == view)
+            return ;
+
+        InputMethodManager inputManager = getInputMethodManager();
+        // 即使当前焦点不在editText，也是可以隐藏的。
+        if (inputManager != null) {
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 
@@ -135,7 +249,6 @@ public class KeyBordUtil {
 //        if (imm == null){ return;}
 //        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
-
 
 
     private static int getContentViewInvisibleHeight(final Activity activity) {
@@ -172,11 +285,12 @@ public class KeyBordUtil {
 
     /**
      * 添加软键盘弹出隐藏监听
+     *
      * @param activity
      * @param listener true==显示  false==隐藏
      */
     public static void addKeyBordShowListener(final Activity activity, final KOnKeyBordShowListener listener) {
-        addKeyBordShowListener(activity,ScreenUtil.getScreenHeight() / 3, listener);
+        addKeyBordShowListener(activity, ScreenUtil.getScreenHeight() / 3, listener);
     }
 
     /**

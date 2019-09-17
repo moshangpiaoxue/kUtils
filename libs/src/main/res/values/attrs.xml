@@ -6,16 +6,16 @@
         <attr name="outer_color" format="color" />
         <attr name="inner_width" format="dimension" />
         <attr name="inner_color" format="color" />
-        <attr name="inner_rotating_speed" format="integer"></attr>
+        <attr name="inner_rotating_speed" format="integer" />
         <attr name="mode">
             <enum name="arc" value="1" />
             <enum name="circle" value="2" />
             <enum name="custom" value="3" />
         </attr>
         <!-- mode=circle时有效 -->
-        <attr name="inner_circle_speed" format="integer"></attr>
+        <attr name="inner_circle_speed" format="integer" />
         <!-- mode=custom时有效 -->
-        <attr name="inner_custom_degree" format="integer"></attr>
+        <attr name="inner_custom_degree" format="integer" />
     </declare-styleable>
     <!--
        max                 最大进度

@@ -1,0 +1,176 @@
+一.线程的实现方式有哪几种？
+1.继承Thread类，重写run方法 无返回值
+             Thread thread = new Thread(){
+                        @Override
+                        public void run() {
+                            super.run();
+                        }
+                    };
+                    thread.start();
+2.实现Runnable接口，重写run方法，实现Runnable接口的实现类的实例对象作为Thread构造函数的target 无返回值
+         Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                    }
+                });
+                t.start();
+3.通过Callable和FutureTask创建线程 有返回值
+        FutureTask<Object> oneTask = new FutureTask<Object>(new Callable<Object>() {
+                   @Override
+                   public Object call() throws Exception {
+                       //这里处理数据
+                       return new Object();
+                   }
+               });
+               Thread t = new Thread(oneTask);
+               System.out.println(Thread.currentThread().getName());
+               t.start();
+               try {
+                   //执行结果
+                   Object ob = oneTask.get();
+               } catch (ExecutionException e) {
+                   e.printStackTrace();
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+4.通过线程池创建线程 有返回值
+                 ExecutorService executorService = Executors.newFixedThreadPool(5);
+                        for (int i = 0; i < 5; i++) {
+                            Runnable thread = new Runnable() {
+                                @Override
+                                public void run() {
+                                }
+                            };
+                            //Thread.sleep(1000);
+                            executorService.execute(thread);
+                        }
+                        //关闭线程池
+                        executorService.shutdown();
+
+
+
+二.请详细说明线程池的工作原理？
+https://blog.csdn.net/lzxlfly/article/details/83904032
+一个线程池管理了一组工作线程， 同时它还包括了一个用于放置等待执行任务的任务队列（阻塞队列） 。
+
+三.线程同步的方式有哪些？
+
+1. 使用同步关键字synchronized
+2. 使用关键字volatile修饰共享变量实现伪同步
+通过Object的wait和notify
+通过Condition的awiat和signal
+通过一个阻塞队列
+通过两个阻塞队列
+通过SynchronousQueue 
+通过线程池的Callback回调
+通过同步辅助类CountDownLatch
+通过同步辅助类CyclicBarrier
+
+四.线程间的通信
+1.使用同一个共享变量控制
+1）、Synchronized、wait、notify：
+使用方式：使用Synchronized锁住数据，然后对其进行操作，操作完成后.notify();
+2）、Lock、Condition  https://blog.csdn.net/wlddhj/article/details/83793709
+3）、volatile、AtomicInteger：volatile修饰的变量值直接存在主内存里面，子线程对该变量的读写直接写住内存，而不是像其它变量一样在local thread里面产生一份copy。
+            volatile能保证所修饰的变量对于多个线程可见性，即只要被修改，其它线程读到的一定是最新的值。
+
+            AtomicInteger类似
+2.PipedInputStream、PipedOutputStream：用流在两个线程间通信，但是Java中的Stream是单向的，所以在两个线程中分别建了一个input和output
+3.BlockingQueue：阻塞队列 可以理解为一个自带控制锁的队列，包含add put等方法
+
+
+五.什么情况下会产生线程同步死锁？
+
+造成死锁的原因：
+1、  自己锁自己。线程获得锁A，没有给自己解锁又去拿锁A，一直阻塞造成死锁。
+2、  两个共享数据，两把锁AB。线程一获得锁 A后又去获取锁B，但是线程二获得B锁又去获取A锁，两者都拿不到对方的锁，两者造成死锁。
+解决方法：
+1让线程按顺序访问共享资源。
+2在访问另外一个共享资源之前先解锁已经拥有的锁
+3在访问之前使用trylock函数尝试加锁，如果失败就直接返回
+
+六.wait notify notifyAll 的功能是什么？
+
+wait：是让步的意思，当前线程在没有满足某种自己设置的某种条件的时候，就可以使用别的线程先调用，避免造成死锁。
+notify: 唤醒在监视器对象上等待的单个线程，此时调用该方法的代码继续执行。
+notifyAll: 唤醒在监视器对象上等待的所有线程，此时调用该方法的代码继续执行。
+
+六.加锁  synchronized、ReentrantLock、lock、Atomic区别 怎么用 啥时候锁对象
+特点：
+volatile：关键字，只能保证可见性，但是不能保证原子性
+atomic：关键字，能保证可见性，也能保证原子性
+synchronized：保证了线程的同步进行。synchronized可以用于函数，也可以用于代码段，synchronized为非公平锁，通过锁实现了代码中的并行计算。
+reentrantLock：能够实现synchronized的所有功能，并且具有以下几个特点：
+1、reentrantLock对代码加锁的颗粒性会更小，更节省资源，提高代码性能。
+2、reentrantLock可以设置多个条件，满足这些条件的才能加锁或者释放锁。
+3、reentrantLock能实现公平锁和非公平锁，而synchronied是一个非公平锁。公平锁，就是先来的先获取资源，非公平锁就是每次都是相互争抢。
+3、reentrantLock可以进行中断，等待锁的机制。
+
+区别：
+1.Reentrantlock的主要实现在java代码中而synchronized的主要实现在JVM中。
+2.Reentrantlock和synchronized在最底层都由Atomic::cmpxchg函数来完成，本质上都是由同一个底层实现，而Atomic::cmpxchg函数在不同的平台有不同的汇编实现。
+
+
+
+八.hashmap hashtable 的区别
+
+HashTable
+底层数组+链表实现，无论key还是value都不能为null，线程安全，实现线程安全的方式是在修改数据时锁住整个HashTable，效率低，ConcurrentHashMap做了相关优化
+初始size为11，扩容：newsize = olesize*2+1
+计算index的方法：index = (hash & 0x7FFFFFFF) % tab.length
+
+HashMap
+底层数组+链表实现，可以存储null键和null值，线程不安全
+初始size为16，扩容：newsize = oldsize*2，size一定为2的n次幂
+扩容针对整个Map，每次扩容时，原来数组中的元素依次重新计算存放位置，并重新插入
+插入元素后才判断该不该扩容，有可能无效扩容（插入后如果扩容，如果没有再次插入，就会产生无效扩容）
+当Map中元素总数超过Entry数组的75%，触发扩容操作，为了减少链表长度，元素分配更均匀
+计算index方法：index = hash & (tab.length – 1)
+
+ConcurrentHashMap
+底层采用分段的数组+链表实现，线程安全
+通过把整个Map分为N个Segment，可以提供相同的线程安全，但是效率提升N倍，默认提升16倍。(读操作不加锁，由于HashEntry的value变量是 volatile的，也能保证读取到最新的值。)
+Hashtable的synchronized是针对整张Hash表的，即每次锁住整张表让线程独占，ConcurrentHashMap允许多个修改操作并发进行，其关键在于使用了锁分离技术
+有些方法需要跨段，比如size()和containsValue()，它们可能需要锁定整个表而而不仅仅是某个段，这需要按顺序锁定所有段，操作完毕后，又按顺序释放所有段的锁
+扩容：段内扩容（段内元素超过该段对应Entry数组长度的75%触发扩容，不会对整个Map进行扩容），插入前检测需不需要扩容，有效避免无效扩容
+
+
+handler发送一个消息到massagequeue里，looper死循环遍历massagequeue，把处于顶层的消息取出来，给handler，让他处理数据
+
+
+android中更新UI的几种方式？
+（1）、runOnUiThread(runnable)
+（2）、handler.post(runnable)
+（3）、handler.sendMessage
+（4）、view.post(runnable)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

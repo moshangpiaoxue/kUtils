@@ -6,8 +6,8 @@ import android.os.StatFs;
 import android.text.format.Formatter;
 
 import com.libs.k;
-import com.libs.modle.constants.Limits;
-import com.libs.utils.fileUtil.FileSize;
+import com.libs.modle.unit.Limits;
+import com.libs.modle.unit.FileSize;
 
 import java.io.File;
 

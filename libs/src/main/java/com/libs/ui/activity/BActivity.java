@@ -9,10 +9,11 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.libs.modle.manager.ThreadManager;
+import com.libs.utils.task.ThreadManager;
 import com.libs.utils.appUtils.AppInfoUtil;
 import com.libs.utils.logUtils.LogUtil;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +63,6 @@ public class BActivity extends AppCompatActivity {
     protected List<String> mThreadNameList;
 
     /**
-     *
      * 省的每页写，不喜欢每次创建，抽出来
      */
     @SuppressLint("HandlerLeak")
@@ -70,11 +70,29 @@ public class BActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            onHandlerMessage(msg.arg1,msg.arg2,msg.obj,msg);
+            onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
         }
     };
+    protected MyHandler myHandler;
 
-    protected void onHandlerMessage(int arg1, int arg2, Object obj, Message msg) {
+    private static class MyHandler extends Handler {
+        private WeakReference<Activity> mWeakReference;
+
+        public MyHandler(Activity activity) {
+            mWeakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Activity mainActivity = mWeakReference.get();
+            if (mainActivity != null) {
+                onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
+            }
+        }
+    }
+
+    protected static void onHandlerMessage(int arg1, int arg2, Object obj, Message msg) {
 
 
     }
@@ -106,6 +124,7 @@ public class BActivity extends AppCompatActivity {
         mIntent = getIntent();
         isRunning = true;
         mThreadNameList = new ArrayList<String>();
+        myHandler = new MyHandler(mActivity);
     }
 
     /**
@@ -215,6 +234,7 @@ public class BActivity extends AppCompatActivity {
 //        if (RxBus.getDefault().hasSubscribers()) {
 //            RxBus.getDefault().unregisterAll();
 //        }
+        myHandler.removeCallbacksAndMessages(null);
     }
 
     /**

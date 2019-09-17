@@ -1,4 +1,4 @@
-package com.libs.modle.service.keepLive;
+package com.libs.service.keepLive;
 
 import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;

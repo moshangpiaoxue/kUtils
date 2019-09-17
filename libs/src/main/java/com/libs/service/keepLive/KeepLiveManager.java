@@ -1,11 +1,11 @@
-package com.libs.modle.service.keepLive;
+package com.libs.service.keepLive;
 
 import android.content.Intent;
 import android.content.IntentFilter;
 
 import com.libs.k;
-import com.libs.modle.service.keepLive.doubleService.LiveBroadcast;
-import com.libs.modle.service.keepLive.doubleService.LiveServiceOne;
+import com.libs.service.keepLive.doubleService.LiveBroadcast;
+import com.libs.service.keepLive.doubleService.LiveServiceOne;
 
 
 /**

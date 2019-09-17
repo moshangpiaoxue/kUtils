@@ -1,8 +1,8 @@
-package com.libs.utils.dataUtil.dealUtil;
+package com.libs.utils.colorsUtils;
 
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
+import android.support.annotation.FloatRange;
 import android.util.TypedValue;
 
 import com.libs.R;
@@ -23,24 +23,16 @@ public class ColorUtils {
     }
 
     /**
-     * 添加颜色透明度
+     * 设置颜色的alpha值
      *
-     * @param color color值
-     * @param alpha alpha值 -1=半透明
-     * @return
+     * @param color    需要被设置的颜色值
+     * @param alpha    取值为[0,1]，0表示全透明，1表示不透明
+     * @param override 覆盖原本的 alpha
+     * @return 返回改变了 alpha 值的颜色值
      */
-    public static int getColor(@ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
-        if (alpha == 0) {
-            return color;
-        }
-        float a = 1 - alpha / 255f;
-        int red = color >> 16 & 0xff;
-        int green = color >> 8 & 0xff;
-        int blue = color & 0xff;
-        red = (int) (red * a + 0.5);
-        green = (int) (green * a + 0.5);
-        blue = (int) (blue * a + 0.5);
-        return 0xff << 24 | red << 16 | green << 8 | blue;
+    public static int getColor(@ColorInt int color, @FloatRange(from = 0, to = 1) float alpha, boolean override) {
+        int origin = override ? 0xff : (color >> 24) & 0xff;
+        return color & 0x00ffffff | (int) (alpha * origin) << 24;
     }
 
     /**
@@ -94,25 +86,26 @@ public class ColorUtils {
     }
 
     /**
-     * 通过颜色的 int 色值获取颜色对应的十六进制字符串表示
+     * 将 color 颜色值转换为十六进制字符串
      *
      * @param color 颜色色值
      * @return 十六进制表示的字符串颜色
      */
     public static String getColorString(int color) {
-        int alpha = Color.alpha(color);
-        int red = Color.red(color);
-        int green = Color.green(color);
-        int blue = Color.blue(color);
-        StringBuilder builder = new StringBuilder("#");
-        char[] chars = "0123456789ABCDEF".toCharArray();
-        if (alpha < 255) {
-            builder.append(chars[alpha / 16]).append(chars[alpha % 16]);
-        }
-        builder.append(chars[red / 16]).append(chars[red % 16]);
-        builder.append(chars[green / 16]).append(chars[green % 16]);
-        builder.append(chars[blue / 16]).append(chars[blue % 16]);
-        return builder.toString();
+        return String.format("#%08X", color);
+//        int alpha = Color.alpha(color);
+//        int red = Color.red(color);
+//        int green = Color.green(color);
+//        int blue = Color.blue(color);
+//        StringBuilder builder = new StringBuilder("#");
+//        char[] chars = "0123456789ABCDEF".toCharArray();
+//        if (alpha < 255) {
+//            builder.append(chars[alpha / 16]).append(chars[alpha % 16]);
+//        }
+//        builder.append(chars[red / 16]).append(chars[red % 16]);
+//        builder.append(chars[green / 16]).append(chars[green % 16]);
+//        builder.append(chars[blue / 16]).append(chars[blue % 16]);
+//        return builder.toString();
     }
 
     /**
@@ -123,4 +116,37 @@ public class ColorUtils {
         int mix = (int) (fgArgb * fgAlpha / 255f + (1 - fgAlpha / 255f) * bgArgb * bgAlpha / 255f);
         return mix > 255 ? 255 : mix;
     }
+
+    /**
+     * 根据比例，在两个color值之间计算出一个color值
+     * <b>注意该方法是ARGB通道分开计算比例的</b>
+     *
+     * @param fromColor 开始的color值
+     * @param toColor   最终的color值
+     * @param fraction  比例，取值为[0,1]，为0时返回 fromColor， 为1时返回 toColor
+     * @return 计算出的color值
+     */
+    public static int computeColor(@ColorInt int fromColor, @ColorInt int toColor, float fraction) {
+        fraction = Math.max(Math.min(fraction, 1), 0);
+
+        int minColorA = Color.alpha(fromColor);
+        int maxColorA = Color.alpha(toColor);
+        int resultA = (int) ((maxColorA - minColorA) * fraction) + minColorA;
+
+        int minColorR = Color.red(fromColor);
+        int maxColorR = Color.red(toColor);
+        int resultR = (int) ((maxColorR - minColorR) * fraction) + minColorR;
+
+        int minColorG = Color.green(fromColor);
+        int maxColorG = Color.green(toColor);
+        int resultG = (int) ((maxColorG - minColorG) * fraction) + minColorG;
+
+        int minColorB = Color.blue(fromColor);
+        int maxColorB = Color.blue(toColor);
+        int resultB = (int) ((maxColorB - minColorB) * fraction) + minColorB;
+
+        return Color.argb(resultA, resultR, resultG, resultB);
+    }
+
+
 }

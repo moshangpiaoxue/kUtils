@@ -6,56 +6,6 @@ package com.libs.modle.constants;
  */
 public class ConstUtil {
 
-    /******************** 存储相关常量 ********************/
-    /**
-     * Byte与Byte的倍数
-     */
-    public static final int BYTE = 1;
-    /**
-     * KB与Byte的倍数
-     */
-    public static final int KB = 1024;
-    /**
-     * MB与Byte的倍数
-     */
-    public static final int MB = 1048576;
-    /**
-     * GB与Byte的倍数
-     */
-    public static final int GB = 1073741824;
-
-    public enum MemoryUnit {
-        BYTE,
-        KB,
-        MB,
-        GB
-    }
-
-    /**
-     * 时间单位
-     */
-    public enum TimeUnit {
-        /**
-         * 毫秒
-         */
-        MSEC,
-        /**
-         * 秒
-         */
-        SEC,
-        /**
-         * 分
-         */
-        MIN,
-        /**
-         * 小时
-         */
-        HOUR,
-        /**
-         * 天
-         */
-        DAY
-    }
 
     /******************** 正则相关常量 ********************/
 

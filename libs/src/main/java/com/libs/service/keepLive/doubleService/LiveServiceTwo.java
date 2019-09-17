@@ -1,4 +1,4 @@
-package com.libs.modle.service.keepLive.doubleService;
+package com.libs.service.keepLive.doubleService;
 
 import android.app.Service;
 import android.content.Intent;

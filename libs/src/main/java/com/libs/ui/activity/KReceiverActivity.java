@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.view.View;
 
-import com.libs.modle.broadcastreceivers.GPSBroadcastReceiver;
-import com.libs.modle.broadcastreceivers.HomeBroadcastReceiver;
-import com.libs.modle.broadcastreceivers.LockScreenBroadcastReceiver;
-import com.libs.modle.broadcastreceivers.NetChangeBroadcastReceiver;
+import com.libs.broadcastreceivers.GPSBroadcastReceiver;
+import com.libs.broadcastreceivers.HomeBroadcastReceiver;
+import com.libs.broadcastreceivers.LockScreenBroadcastReceiver;
+import com.libs.broadcastreceivers.NetChangeBroadcastReceiver;
 import com.libs.modle.listener.receiverListener.KOnGpsChangeListener;
 import com.libs.modle.listener.receiverListener.KOnHomeListener;
 import com.libs.modle.listener.receiverListener.KOnLockScreenListener;

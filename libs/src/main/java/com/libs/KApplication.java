@@ -94,18 +94,7 @@ public class KApplication extends MultiDexApplication {
         mMainThread = Thread.currentThread();
         mMainThreadId = android.os.Process.myTid();
         mHandler = new Handler();
-//        ToastUtils.init(this);
-//        ToastUtils.initStyle(new ToastWhiteStyle(){
-//            @Override
-//            public int getGravity() {
-//                return Gravity.BOTTOM;
-//            }
-//
-//            @Override
-//            public int getYOffset() {
-//                return 20;
-//            }
-//        });
+
     }
 
 

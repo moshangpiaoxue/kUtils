@@ -1,6 +1,7 @@
 package com.libs.utils.dataUtil.date;
 
 import com.libs.modle.constants.ConstUtil;
+import com.libs.modle.unit.TimeUnit;
 import com.libs.utils.dataUtil.LongUtil;
 
 import java.text.ParseException;
@@ -8,11 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.libs.modle.constants.KConstans.DAY;
-import static com.libs.modle.constants.KConstans.HOUR;
-import static com.libs.modle.constants.KConstans.MIN;
-import static com.libs.modle.constants.KConstans.MSEC;
-import static com.libs.modle.constants.KConstans.SEC;
+import static com.libs.modle.unit.TimeUnit.DAY;
+import static com.libs.modle.unit.TimeUnit.HOUR;
+import static com.libs.modle.unit.TimeUnit.MIN;
+import static com.libs.modle.unit.TimeUnit.MSEC;
+import static com.libs.modle.unit.TimeUnit.SEC;
 import static com.libs.utils.dataUtil.date.CalendarUtil.getCalendar;
 import static com.libs.utils.dataUtil.date.DateFormatUtil.getSDF;
 
@@ -20,9 +21,9 @@ import static com.libs.utils.dataUtil.date.DateFormatUtil.getSDF;
  * @ author：mo
  * @ data：2019/2/15:11:03
  * @ 功能：日期格式的转换工具类
- *
- *
- *
+ * <p>
+ * <p>
+ * <p>
  * format 格式 如 "yyyy-MM-dd HH:mm:ss"   或   yyyy年MM月dd日   yyyy是完整的公元年，MM是月份，dd是日期
  * * 备注:获取12小时制的时间要把HH换成小写hh，默认是大写的24小时制的
  * G：年代标识，表示是公元前还是公元后
@@ -148,7 +149,7 @@ public class DateUtil {
      * @param unit         要转换成的单位
      * @return unit时间戳
      */
-    private static long ms2Unit(long milliseconds, ConstUtil.TimeUnit unit) {
+    private static long ms2Unit(long milliseconds, TimeUnit.TimesUnit unit) {
         switch (unit) {
             case MSEC:
                 return milliseconds / MSEC;
@@ -173,7 +174,7 @@ public class DateUtil {
      * @param unit         要转换成的单位
      * @return unit时间戳
      */
-    private static long unit2Ms(long milliseconds, ConstUtil.TimeUnit unit) {
+    private static long unit2Ms(long milliseconds, TimeUnit.TimesUnit unit) {
         switch (unit) {
             case MSEC:
                 return milliseconds * MSEC;
@@ -197,7 +198,7 @@ public class DateUtil {
      * @return 10位时间戳
      */
     public static long getM() {
-        return ms2Unit(getMS(), ConstUtil.TimeUnit.SEC);
+        return ms2Unit(getMS(), TimeUnit.TimesUnit.SEC);
     }
 
     /**
@@ -479,14 +480,15 @@ public class DateUtil {
 
     /**
      * 获取前n天或后n天的日期
-     * @param days  天数  几天前/后 负数是前，正数是后
-     * @param format    返回日期格式
+     *
+     * @param days   天数  几天前/后 负数是前，正数是后
+     * @param format 返回日期格式
      * @return days天前后的日期
      */
-    public static String getDateString(int days,String format){
-        Calendar calendar=Calendar.getInstance();
-        calendar.add(Calendar.DATE,days);
-        return getSDF(format).format( calendar.getTime());
+    public static String getDateString(int days, String format) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, days);
+        return getSDF(format).format(calendar.getTime());
     }
 //////////////////////////////////////////////////////////////////////  Week 星期  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -11,14 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.libs.modle.manager.KInputMethodManager;
 import com.libs.modle.viewHolder.ViewHolder;
 import com.libs.utils.appUtils.barUtils.SratusBarUtil;
 import com.libs.utils.bengUtil.NextActivityUtil;
 import com.libs.utils.logUtils.LogUtil;
+import com.libs.utils.systemUtils.KeyBordUtil;
 import com.libs.utils.systemUtils.ScreenUtil;
 import com.libs.utils.tipsUtil.ToastUtil;
-
 
 
 /**
@@ -111,7 +110,7 @@ public abstract class KBaseActivity extends KMediaActivity {
      * 吐司提示
      */
     public void showToast(String string) {
-        ToastUtil.showToast(mActivity,string);
+        ToastUtil.showToast(mActivity, string);
     }
 
     /**
@@ -153,14 +152,14 @@ public abstract class KBaseActivity extends KMediaActivity {
      * 开启键盘
      */
     protected void openInput() {
-        KInputMethodManager.INSTANCE.openKeybord(mActivity, true);
+        KeyBordUtil.isShowKeybord(mActivity, true);
     }
 
     /**
      * 关闭键盘
      */
     protected void closeInput() {
-        KInputMethodManager.INSTANCE.openKeybord(mActivity, false);
+        KeyBordUtil.isShowKeybord(mActivity, false);
     }
 
     public ViewHolder getViewHolder() {
@@ -176,7 +175,7 @@ public abstract class KBaseActivity extends KMediaActivity {
 
 
     /**
-     * 让字体不随系统字体改变
+     * 让字体不随系统字体改变、多语言的时候要换掉，不然切换语言失效
      */
     @Override
     public Resources getResources() {
@@ -191,6 +190,7 @@ public abstract class KBaseActivity extends KMediaActivity {
     public void onBackPressed() {
         finishActivity(mActivity);
     }
+
     /**
      * 关闭当前activity
      */
@@ -255,6 +255,7 @@ public abstract class KBaseActivity extends KMediaActivity {
         super.onPause();
         closeInput();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (getTitleRigthMenu() != 0) {

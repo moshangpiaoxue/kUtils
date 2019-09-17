@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.libs.R;
 import com.libs.k;
-import com.libs.modle.manager.KInputMethodManager;
+import com.libs.utils.systemUtils.KeyBordUtil;
 
 
 /**
@@ -83,7 +83,7 @@ public class CarNumKeyboardView extends RelativeLayout {
             }
         });
         //禁用系统输入法
-        KInputMethodManager.INSTANCE.hideSoftInputMethod(activity, editText);
+        KeyBordUtil.hideSoftInputMethod(activity, editText);
         setKeyboardShow(isShow);
     }
 

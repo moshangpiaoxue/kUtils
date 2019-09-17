@@ -13,7 +13,7 @@ import android.support.v4.app.NotificationManagerCompat;
 
 import com.libs.R;
 import com.libs.k;
-import com.libs.modle.broadcastreceivers.NotificationBroadcastReceiver;
+import com.libs.broadcastreceivers.NotificationBroadcastReceiver;
 import com.libs.utils.dataUtil.StringUtil;
 
 

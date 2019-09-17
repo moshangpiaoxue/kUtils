@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.libs.k;
-import com.libs.utils.dataUtil.dealUtil.ColorUtils;
+import com.libs.utils.colorsUtils.ColorUtils;
 import com.libs.utils.logUtils.LogUtil;
 
 

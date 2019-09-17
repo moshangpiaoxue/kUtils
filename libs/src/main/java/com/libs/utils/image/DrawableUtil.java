@@ -11,7 +11,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.libs.k;
-import com.libs.utils.dataUtil.dealUtil.ColorUtils;
+import com.libs.utils.colorsUtils.ColorUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

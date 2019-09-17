@@ -1,9 +1,9 @@
-package com.libs.utils.task;
+package com.libs.utils.task.handlers;
 
-import android.app.Activity;
 import android.os.Handler;
 
 import com.libs.utils.logUtils.LogUtil;
+import com.libs.utils.task.handlers.HandlerUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,8 +39,7 @@ public class PollingUtil {
      * @param interval       时间间隔
      * @param runImmediately 是否先立即执行一次
      */
-    public void startPolling(final Runnable runnable, final long interval,
-                             boolean runImmediately) {
+    public void startPolling(final Runnable runnable, final long interval,  boolean runImmediately) {
 
         if (runImmediately) {
             runnable.run();
@@ -83,7 +82,6 @@ public class PollingUtil {
      * 添加任务
      */
     private void post(Runnable runnable, long interval) {
-        LogUtil.i("AAAAAAAA");
         this.runnable=runnable;
         Runnable task = mTaskMap.get(runnable);
         mHanlder.removeCallbacks(task);
