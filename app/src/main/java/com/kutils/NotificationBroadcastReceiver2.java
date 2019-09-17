@@ -3,7 +3,7 @@ package com.kutils;
 import android.content.Intent;
 
 import com.libs.k;
-import com.libs.modle.broadcastreceivers.NotificationBroadcastReceiver;
+import com.libs.broadcastreceivers.NotificationBroadcastReceiver;
 
 
 /**

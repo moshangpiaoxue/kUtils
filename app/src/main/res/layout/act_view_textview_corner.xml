@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <mo.klib.view.textView.KCornerTextView
+    <com.libs.view.textView.KCornerTextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_200"
         android:layout_margin="@dimen/dp_20"
@@ -13,4 +13,11 @@
         app:borderWidth="@dimen/dp_2"
         app:borderWidthColor="@color/color_333333"
         app:cornersize="@dimen/dp_50" />
+
+    <TextView
+        android:id="@+id/tv_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"/>
 </LinearLayout>

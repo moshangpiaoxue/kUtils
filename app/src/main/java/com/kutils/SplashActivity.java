@@ -9,7 +9,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.libs.modle.viewHolder.ViewHolder;
 import com.libs.ui.activity.KBaseActivity;
 import com.libs.utils.bengUtil.NextActivityUtil;
-import com.libs.utils.task.threadPool.ThreadPoolUtil;
+import com.libs.utils.task.threadPool.ThreadPoolProxyFactory;
 
 
 /**
@@ -37,7 +37,7 @@ public class SplashActivity extends KBaseActivity {
                 error(R.mipmap.aa).
                 fallback(R.mipmap.aa).
                 into(iv_splash);
-        ThreadPoolUtil.runTaskInThread(new Runnable() {
+        ThreadPoolProxyFactory.getSingleThreadPool().submit(new Runnable() {
             @Override
             public void run() {
                 try {

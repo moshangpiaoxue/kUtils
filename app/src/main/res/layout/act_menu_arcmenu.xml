@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.libs.view.menu.KArcMenu
+                android:id="@+id/kam_satellite_1"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:kam_radius="100dp"
+                app:kam_position="right_bottom">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_camera"
+                    android:gravity="center"
+                    android:text="P" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_music"
+                    android:gravity="center"
+                    android:text="R" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_place"
+                    android:gravity="center"
+                    android:text="M" />
+            </com.libs.view.menu.KArcMenu>
+
+            <com.libs.view.menu.KArcMenu
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                app:kam_position="left_top"
+                app:kam_radius="90dp">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_sleep"
+                    android:gravity="center"
+                    android:text="P" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_thought"
+                    android:gravity="center"
+                    android:text="R" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_with"
+                    android:gravity="center"
+                    android:text="M" />
+            </com.libs.view.menu.KArcMenu>
+
+            <com.libs.view.menu.KArcMenu
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                app:kam_position="right_top"
+                app:kam_radius="60dp">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_camera"
+                    android:gravity="center"
+                    android:text="P" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_music"
+                    android:gravity="center"
+                    android:text="R" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_place"
+                    android:gravity="center"
+                    android:text="Q" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_sleep"
+                    android:gravity="center"
+                    android:text="M" />
+            </com.libs.view.menu.KArcMenu>
+
+            <com.libs.view.menu.KArcMenu
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+
+                app:kam_position="right_bottom"
+                app:kam_radius="90dp">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_camera"
+                    android:gravity="center"
+                    android:text="A" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_music"
+                    android:gravity="center"
+                    android:text="B" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_place"
+                    android:gravity="center"
+                    android:text="C" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_sleep"
+                    android:gravity="center"
+                    android:text="D" />
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_thought"
+                    android:gravity="center"
+                    android:text="M" />
+            </com.libs.view.menu.KArcMenu>
+            <com.libs.view.menu.KArcMenu
+                android:id="@+id/kam_arc"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                app:kam_position="right_bottom"
+                app:kam_radius="90dp">
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/composer_place"
+                    android:gravity="center"
+                    android:text="M" />
+            </com.libs.view.menu.KArcMenu>
+        </LinearLayout>
+
+
+</ScrollView>

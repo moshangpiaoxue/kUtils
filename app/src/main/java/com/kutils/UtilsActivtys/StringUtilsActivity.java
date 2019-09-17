@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.kutils.R;
 import com.libs.ui.activity.KBaseLayoutActivity;
 import com.libs.utils.dataUtil.SpannableStringUtil;
+import com.libs.utils.dataUtil.dealUtil.DensityUtil;
 
 
 /**
@@ -81,6 +82,7 @@ public class StringUtilsActivity extends KBaseLayoutActivity {
                 .addString("\n测试正常对齐\n").setAlign(Layout.Alignment.ALIGN_NORMAL)
                 .addString("测试居中对齐\n").setAlign(Layout.Alignment.ALIGN_CENTER)
                 .addString("测试相反对齐\n").setAlign(Layout.Alignment.ALIGN_OPPOSITE)
+                .addString("测试改变字体大小\n").setSize(30)
                 .addToTextView(item_1);
     }
 }

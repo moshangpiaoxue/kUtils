@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.libs.modle.adapter.KRecycleViewAdapter;
 import com.libs.modle.viewHolder.KRecycleViewHolder;
 import com.libs.ui.activity.KBaseListActivity;
-import com.libs.utils.task.HandlerUtil;
+import com.libs.utils.task.handlers.HandlerUtil;
 
 import java.util.ArrayList;
 import java.util.List;

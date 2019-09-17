@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <mo.klib.view.textView.KSlantedTextView
+        <com.libs.view.textView.KSlantedTextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:gravity="center"
@@ -20,7 +20,7 @@
             app:slantedTextColor="@color/color_000000"
             app:slantedTextSize="16sp" />
 
-        <mo.klib.view.textView.KSlantedTextView
+        <com.libs.view.textView.KSlantedTextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="right"
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <mo.klib.view.textView.KSlantedTextView
+        <com.libs.view.textView.KSlantedTextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:gravity="center"
@@ -49,7 +49,7 @@
             app:slantedTextColor="@color/color_000000"
             app:slantedTextSize="16sp" />
 
-        <mo.klib.view.textView.KSlantedTextView
+        <com.libs.view.textView.KSlantedTextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="right"
@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <mo.klib.view.textView.KSlantedTextView
+        <com.libs.view.textView.KSlantedTextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:gravity="center"
@@ -79,7 +79,7 @@
             app:slantedTextColor="@color/color_000000"
             app:slantedTextSize="16sp" />
 
-        <mo.klib.view.textView.KSlantedTextView
+        <com.libs.view.textView.KSlantedTextView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="right"

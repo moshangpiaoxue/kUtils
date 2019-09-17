@@ -1,4 +1,4 @@
-package com.kutils.UtilsActivtys;
+package com.kutils.FrameActivitys;
 
 import com.kutils.bean.MainBean;
 import com.kutils.modle.AdapterModle;
@@ -11,9 +11,9 @@ import java.util.List;
 /**
  * @ author：mo
  * @ data：2019/6/12：10:31
- * @ 功能：Utils相关
+ * @ 功能：框架相关
  */
-public class aUtilActivity extends KBaseListActivity<MainBean> {
+public class aFrameActivity extends KBaseListActivity<MainBean> {
     @Override
     protected boolean isCanAutoRefresh() {
         return false;
@@ -21,17 +21,11 @@ public class aUtilActivity extends KBaseListActivity<MainBean> {
 
     @Override
     protected void initListView() {
-        title.setMidleText("Utils相关");
+        title.setMidleText("框架相关");
         kRecycleview.setLayoutGrid(4);
         List<MainBean> list = new ArrayList<>();
-        list.add(new MainBean("SpannableStringUtil", StringUtilsActivity.class));
-        list.add(new MainBean("跳系统界面", BengSysActivity.class));
-        list.add(new MainBean("吐司", ToastUtilActivity.class));
-        list.add(new MainBean("系统厂商信息", RomUtilActivity.class));
-        list.add(new MainBean("应用分身检查", AppSeparationActivity.class));
-        list.add(new MainBean("线程相关", TaskUtilsActivity.class));
-        list.add(new MainBean("颜色相关", ColorsActivity.class));
-        list.add(new MainBean("键盘相关", KeyBordActivity.class));
+        list.add(new MainBean("下拉列表\nSmartRefreshLayout", SmartRefreshLayoutActivity.class));
+        list.add(new MainBean("图片选择\nMatisse", MatisseActivity.class));
         refeshAdapter(list);
     }
 

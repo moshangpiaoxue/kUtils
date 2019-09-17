@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.kutils" >
+    package="com.kutils">
 
 
     <uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
@@ -21,8 +21,10 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
 
+
+
         <receiver android:name=".NotificationBroadcastReceiver2" />
-        <receiver android:name="com.libs.modle.broadcastreceivers.SmsBroadcastReceiver$Receiver">
+        <receiver android:name="com.libs.broadcastreceivers.SmsBroadcastReceiver$Receiver">
             <intent-filter android:priority="1000">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
@@ -41,13 +43,16 @@
             android:name=".SplashActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme">
+
+        </activity>
+
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" />
         <activity android:name=".MainActivity2" />
         <activity android:name=".ListActivity" />
         <activity android:name=".UtilsActivtys.AppSeparationActivity" />
@@ -60,6 +65,25 @@
         <activity android:name=".UtilsActivtys.ToastUtilActivity" />
         <activity android:name=".UtilsActivtys.RomUtilActivity" />
         <activity android:name=".ViewActivitys.TextViews.CornerTextViewActivity" />
+        <activity android:name=".algorithmActivitys.AlgorithmActivity">
+
+        </activity>
+        <activity android:name=".algorithmActivitys.LintCodeActivity">
+
+        </activity>
+        <activity android:name=".ViewActivitys.RecyclerViews.aRecyclerViewActivity" />
+        <activity android:name=".ViewActivitys.RecyclerViews.GalleryRecyclerViewActivity" />
+        <activity android:name=".ViewActivitys.MenuViews.ArcMenuActivity" />
+
+        <activity android:name=".ViewActivitys.MenuViews.aSatelliteActivity" />
+        <activity android:name=".ViewActivitys.MenuViews.SatelliteMenuActivity" />
+        <activity android:name=".UtilsActivtys.TaskUtilsActivity" />
+        <activity android:name=".UtilsActivtys.SettingWhiteListActivity" />
+        <activity android:name=".FrameActivitys.aFrameActivity" />
+        <activity android:name=".FrameActivitys.SmartRefreshLayoutActivity" />
+        <activity android:name=".FrameActivitys.MatisseActivity" />
+        <activity android:name=".UtilsActivtys.ColorsActivity" />
+        <activity android:name=".UtilsActivtys.KeyBordActivity" />
 
 
     </application>

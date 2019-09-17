@@ -1,8 +1,6 @@
-package com.kutils.ViewActivitys;
+package com.kutils.ViewActivitys.MenuViews;
 
-import com.kutils.ViewActivitys.MenuViews.aSatelliteActivity;
-import com.kutils.ViewActivitys.RecyclerViews.aRecyclerViewActivity;
-import com.kutils.ViewActivitys.TextViews.aTextViewActivity;
+import com.kutils.ViewActivitys.TextViews.CornerTextViewActivity;
 import com.kutils.bean.MainBean;
 import com.kutils.modle.AdapterModle;
 import com.libs.modle.adapter.KRecycleViewAdapter;
@@ -11,13 +9,12 @@ import com.libs.ui.activity.KBaseListActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * @ author：mo
  * @ data：2019/6/12：10:31
- * @ 功能：view相关
+ * @ 功能：卫星菜单相关
  */
-public class aViewActivity extends KBaseListActivity<MainBean> {
+public class aSatelliteActivity extends KBaseListActivity<MainBean> {
     @Override
     protected boolean isCanAutoRefresh() {
         return false;
@@ -25,14 +22,11 @@ public class aViewActivity extends KBaseListActivity<MainBean> {
 
     @Override
     protected void initListView() {
-        title.setMidleText("view相关");
+        title.setMidleText("卫星菜单相关");
         kRecycleview.setLayoutGrid(4);
         List<MainBean> list = new ArrayList<>();
-        list.add(new MainBean("TextView", aTextViewActivity.class));
-        list.add(new MainBean("XML背景", aTextViewActivity.class));
-        list.add(new MainBean("RecyclerView", aRecyclerViewActivity.class));
-        list.add(new MainBean("卫星菜单", aSatelliteActivity.class));
-
+        list.add(new MainBean("四分之一弹出", ArcMenuActivity.class));
+        list.add(new MainBean("全弹（动画很骚气）", SatelliteMenuActivity.class));
         refeshAdapter(list);
     }
 
@@ -48,7 +42,7 @@ public class aViewActivity extends KBaseListActivity<MainBean> {
 
     @Override
     protected KRecycleViewAdapter<MainBean> getAdapter() {
-        return AdapterModle.getMainAdapter(mActivity, mData);
+        return AdapterModle.getMainAdapter(mActivity, new ArrayList<MainBean>());
     }
 
 }
