@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="KAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
         <!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
         <!--        <item name="colorAccent">@color/colorAccent</item>-->
     </style>
-
+    <!--这个主题只能被继承自activity的活动引用，AppCompatActivity会直接崩-->
     <style name="SplashTheme" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+    <!--继承自AppCompatActivity的活动引用-->
+    <style name="SplashTheme2" parent="KAppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <!--下面这两个加上点击应用图标启动程序时会有个延时的效果，进入闪屏页时直接就是全屏，不加的话，不会有延时，但是进入闪屏页会看见状态栏和导航栏消失的过程-->
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
