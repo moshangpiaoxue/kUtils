@@ -2,13 +2,13 @@ package com.libs.utils.viewUtil;
 
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
 import android.view.LayoutInflater;
 import android.view.TouchDelegate;
 import android.view.View;
@@ -22,12 +22,10 @@ import android.widget.TextView;
 import com.libs.KApplication;
 import com.libs.utils.ResUtil;
 import com.libs.utils.dataUtil.StringUtil;
-import com.libs.utils.colorsUtils.ColorUtils;
 import com.libs.utils.logUtils.LogUtil;
 import com.libs.utils.task.handlers.HandlerUtil;
 
 import java.util.Arrays;
-
 
 
 /**
@@ -54,7 +52,7 @@ public class ViewUtil {
                 System.arraycopy(mHits, 1, mHits, 0, times - 1);
                 //给数组的最后一个元素赋值
                 mHits[times - 1] = SystemClock.uptimeMillis();
-//                LogUtil.i(mHits);
+                //                LogUtil.i(mHits);
                 //当第mHits[lengt-1]点击的时间戳减去mHits[0]的时间戳小于指定时间则该多击事件生效
                 if (mHits[times - 1] - mHits[0] <= timeBetween) {
                     LogUtil.i(timeBetween + "毫秒内点击" + times + "次");
@@ -102,6 +100,53 @@ public class ViewUtil {
 
     public static View getView(Context context, int layoutId, ViewGroup group) {
         return LayoutInflater.from(context).inflate(layoutId, group, false);
+    }
+    /**
+     * 生成新view
+     *
+     * @param context   载体
+     * @param color      颜色
+     * @param viewId     id
+     * @param viewHeight 高度
+     * @param viewWidth  宽度
+     * @return
+     */
+    public static View getView(Context context, @ColorInt int color, int viewId, int viewHeight, int viewWidth) {
+        if (context instanceof Application) {
+            LogUtil.i("Application不能作为载体创建view");
+            return null;
+        }
+        // 绘制一个和状态栏一样高的矩形
+        View view = new View(context);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewHeight, viewWidth);
+        view.setLayoutParams(params);
+        view.setBackgroundColor(color == 0 ? ResUtil.getColor("#FFFFFF") : color);
+        view.setId(viewId);
+        return view;
+    }
+
+    /**
+     * 根据背景图片生成view
+     *
+     * @param context
+     * @param drawable
+     * @param viewId
+     * @param viewHeight
+     * @param viewWidth
+     * @return
+     */
+    public static View getView(Context context, Drawable drawable, int viewId, int viewHeight, int viewWidth) {
+        if (context instanceof Application) {
+            LogUtil.i("Application不能作为载体创建view");
+            return null;
+        }
+        // 绘制一个和状态栏一样高的矩形
+        View view = new View(context);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewHeight, viewWidth);
+        view.setLayoutParams(params);
+        view.setBackground(drawable);
+        view.setId(viewId);
+        return view;
     }
 
 
@@ -193,10 +238,10 @@ public class ViewUtil {
         int[] location = new int[2];
         view.getLocationInWindow(location);
         if (view.getLocalVisibleRect(rect)) {
-//            LogUtil.i("看见了");
+            //            LogUtil.i("看见了");
             return true;
         } else {
-//            LogUtil.i("看不见了");
+            //            LogUtil.i("看不见了");
             return false;
         }
     }
@@ -327,45 +372,6 @@ public class ViewUtil {
         ((ViewGroup) view).setClipToPadding(isTrue);
     }
 
-    /**
-     * 生成新view
-     *
-     * @param activity   载体
-     * @param color      颜色
-     * @param viewId     id
-     * @param viewHeight 高度
-     * @param viewWidth  宽度
-     * @return
-     */
-    public static View getView(Activity activity, @ColorInt int color, int viewId, int viewHeight, int viewWidth) {
-        // 绘制一个和状态栏一样高的矩形
-        View view = new View(activity);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewHeight, viewWidth);
-        view.setLayoutParams(params);
-        view.setBackgroundColor(color == 0 ? ResUtil.getColor("#FFFFFF") : color);
-        view.setId(viewId);
-        return view;
-    }
-
-    /**
-     * 根据背景图片生成view
-     *
-     * @param activity
-     * @param drawable
-     * @param viewId
-     * @param viewHeight
-     * @param viewWidth
-     * @return
-     */
-    public static View getView(Activity activity, Drawable drawable, int viewId, int viewHeight, int viewWidth) {
-        // 绘制一个和状态栏一样高的矩形
-        View view = new View(activity);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewHeight, viewWidth);
-        view.setLayoutParams(params);
-        view.setBackground(drawable);
-        view.setId(viewId);
-        return view;
-    }
 
     /**
      * 设置提示内容
@@ -380,12 +386,12 @@ public class ViewUtil {
             KApplication.getMainHandler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-//                    mActivity.runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
+                    //                    mActivity.runOnUiThread(new Runnable() {
+                    //                        @Override
+                    //                        public void run() {
                     tipsView.setVisibility(View.INVISIBLE);
-//                        }
-//                    });
+                    //                        }
+                    //                    });
 
                 }
             }, 1200);
@@ -468,12 +474,12 @@ public class ViewUtil {
      */
     public static void hideMenuToast(final Activity activity, final int id) {
         /* 处理item长按弹出Toast Title信息*/
-//        new Handler().post(() -> {
-//            final View v = activity.findViewById(id);
-//            if (v != null) {
-//                v.setOnLongClickListener(v1 -> false);
-//            }
-//        });
+        //        new Handler().post(() -> {
+        //            final View v = activity.findViewById(id);
+        //            if (v != null) {
+        //                v.setOnLongClickListener(v1 -> false);
+        //            }
+        //        });
         HandlerUtil.postRunnable(new Runnable() {
             @Override
             public void run() {

@@ -31,69 +31,69 @@ import java.util.Set;
  */
 public class NavigationBarUtil {
 
-    /**
-     * 是否有导航栏
-     */
-    @SuppressLint("NewApi")
-    public static boolean isNavigationBarHas() {
-        //通过判断设备是否有返回键、菜单键(不是虚拟键,是手机屏幕外的按键)来确定是否有navigation bar
-        return !ViewConfiguration.get(k.app()).hasPermanentMenuKey() && !KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK) ? true : false;
-//        boolean isHave = false;
-//        Resources rs = ResUtil.getResource();
-//        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
-//        if (id > 0) {
-//            isHave = rs.getBoolean(id);
-//        }
-//        try {
-//            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
-//            Method m = systemPropertiesClass.getMethod("get", String.class);
-//            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
-//            if ("1".equals(navBarOverride)) {
-//                isHave = false;
-//            } else if ("0".equals(navBarOverride)) {
-//                isHave = true;
+//    /**
+//     * 是否有导航栏
+//     */
+//    @SuppressLint("NewApi")
+//    public static boolean isNavigationBarHas() {
+//        //通过判断设备是否有返回键、菜单键(不是虚拟键,是手机屏幕外的按键)来确定是否有navigation bar
+//        return !ViewConfiguration.get(k.app()).hasPermanentMenuKey() && !KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK) ? true : false;
+////        boolean isHave = false;
+////        Resources rs = ResUtil.getResource();
+////        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
+////        if (id > 0) {
+////            isHave = rs.getBoolean(id);
+////        }
+////        try {
+////            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+////            Method m = systemPropertiesClass.getMethod("get", String.class);
+////            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+////            if ("1".equals(navBarOverride)) {
+////                isHave = false;
+////            } else if ("0".equals(navBarOverride)) {
+////                isHave = true;
+////            }
+////        } catch (Exception e) {
+////            LogUtil.i(e);
+////        }
+////        return isHave;
+//    }
+//
+//    /**
+//     * 是否有导航栏
+//     */
+//    public static boolean isNavigationBarHas(Activity mActivity) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            Display display = mActivity.getWindowManager().getDefaultDisplay();
+//            Point size = new Point();
+//            Point realSize = new Point();
+//            display.getSize(size);
+//            display.getRealSize(realSize);
+//            return realSize.y != size.y;
+//        } else {
+//            boolean menu = ViewConfiguration.get(mActivity).hasPermanentMenuKey();
+//            boolean back = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+//            if (menu || back) {
+//                return false;
+//            } else {
+//                return true;
 //            }
-//        } catch (Exception e) {
-//            LogUtil.i(e);
 //        }
-//        return isHave;
-    }
+//    }
 
-    /**
-     * 是否有导航栏
-     */
-    public static boolean isNavigationBarHas(Activity mActivity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            Display display = mActivity.getWindowManager().getDefaultDisplay();
-            Point size = new Point();
-            Point realSize = new Point();
-            display.getSize(size);
-            display.getRealSize(realSize);
-            return realSize.y != size.y;
-        } else {
-            boolean menu = ViewConfiguration.get(mActivity).hasPermanentMenuKey();
-            boolean back = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
-            if (menu || back) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
-
-    /**
-     * 导航栏显示状态
-     * @param mActivity
-     * @return
-     */
-    public static boolean isNavBarVisible(Activity mActivity) {
-        Window window = mActivity.getWindow();
-        boolean isNoLimits = (window.getAttributes().flags & WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS) != 0;
-        if (isNoLimits) {
-            return false;
-        }
-        return (window.getDecorView().getSystemUiVisibility() & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
-    }
+//    /**
+//     * 导航栏显示状态
+//     * @param mActivity
+//     * @return
+//     */
+//    public static boolean isNavBarVisible(Activity mActivity) {
+//        Window window = mActivity.getWindow();
+//        boolean isNoLimits = (window.getAttributes().flags & WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS) != 0;
+//        if (isNoLimits) {
+//            return false;
+//        }
+//        return (window.getDecorView().getSystemUiVisibility() & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
+//    }
 
 
 
@@ -152,7 +152,7 @@ public class NavigationBarUtil {
         int navigationBarHeight = 0;
         Resources resources = activity.getResources();
         int resourceId = resources.getIdentifier(resources.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-        if (resourceId > 0 && checkDeviceHasNavigationBar(activity)) {
+        if (resourceId > 0 && isNavBarVisible(activity)) {
             navigationBarHeight = resources.getDimensionPixelSize(resourceId);
         }
         return navigationBarHeight;
@@ -160,8 +160,8 @@ public class NavigationBarUtil {
     /**
      * 导航栏高度
      */
-    public static int getNavBarHeight() {
-        if (!isNavigationBarHas()) {
+    public static int getNavBarHeight(Activity activity) {
+        if (!isNavBarVisible(activity)) {
             return 0;
         }
         Resources res = ResUtil.getResource();
@@ -176,7 +176,7 @@ public class NavigationBarUtil {
      * @param activity
      * @return
      */
-    public static boolean checkDeviceHasNavigationBar(Activity activity) {
+    public static boolean isNavBarVisible(Activity activity) {
         boolean hasNavigationBar = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             if (NO_NAVIGATION_BAR_MODEL_SET.contains(Build.MODEL)) {

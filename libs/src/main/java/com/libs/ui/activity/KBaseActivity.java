@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.libs.modle.viewHolder.ViewHolder;
-import com.libs.utils.appUtils.barUtils.SratusBarUtil;
+import com.libs.utils.appUtils.barUtils.StatusBarUtils;
 import com.libs.utils.bengUtil.NextActivityUtil;
 import com.libs.utils.logUtils.LogUtil;
 import com.libs.utils.systemUtils.KeyBordUtil;
@@ -54,11 +54,11 @@ public abstract class KBaseActivity extends KMediaActivity {
         super.onCreate(savedInstanceState);
         Boolean isShowStatusBar = getShowStatusBar();
         if (!isShowStatusBar) {
-            SratusBarUtil.setStatusBar(mActivity, isShowStatusBar);
+            StatusBarUtils.setStatusBar(mActivity, isShowStatusBar);
         }
         Boolean isShowSteep = getShowSteep();
         if (isShowSteep) {
-            ScreenUtil.setBarTransparent(mActivity);
+            StatusBarUtils.setTransparent(mActivity);
         }
         Boolean isShowFullScreen = getShowFullScreen();
         if (isShowFullScreen) {

@@ -19,7 +19,7 @@ public class NotificationBarUtil {
      */
     public static int getTitleHeight(Activity ctx) {
         int contentTop = ctx.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
-        return contentTop - SratusBarUtil.getStatusBarHeight();
+        return contentTop - StatusBarUtils.getHeight();
     }
     /**
      * 显示通知栏
@@ -27,16 +27,16 @@ public class NotificationBarUtil {
      *
      * @param isVisible {@code true}: 打开设置<br>{@code false}: 打开通知
      */
-//    public static void showNotificationBar(boolean isVisible) {
-////        String methodName = (Build.VERSION.SDK_INT <= 16) ? "expand" : (isSettingPanel ? "expandSettingsPanel" : "expandNotificationsPanel");
-//        String methodName;
-//        if (isVisible) {
-//            methodName = (Build.VERSION.SDK_INT <= 16) ? "expand" : "expandNotificationsPanel";
-//        } else {
-//            methodName = (Build.VERSION.SDK_INT <= 16) ? "collapse" : "collapsePanels";
-//        }
-//        invokePanels(methodName);
-//    }
+    //    public static void showNotificationBar(boolean isVisible) {
+    ////        String methodName = (Build.VERSION.SDK_INT <= 16) ? "expand" : (isSettingPanel ? "expandSettingsPanel" : "expandNotificationsPanel");
+    //        String methodName;
+    //        if (isVisible) {
+    //            methodName = (Build.VERSION.SDK_INT <= 16) ? "expand" : "expandNotificationsPanel";
+    //        } else {
+    //            methodName = (Build.VERSION.SDK_INT <= 16) ? "collapse" : "collapsePanels";
+    //        }
+    //        invokePanels(methodName);
+    //    }
 
 
     /**
@@ -44,16 +44,16 @@ public class NotificationBarUtil {
      *
      * @param methodName 方法名
      */
-//    private static void invokePanels(String methodName) {
-//        try {
-//            @SuppressLint("WrongConstant")
-//            Object service = k.app().getSystemService("statusbar");
-//            @SuppressLint("PrivateApi")
-//            Class<?> statusBarManager = Class.forName("android.app.StatusBarManager");
-//            Method expand = statusBarManager.getMethod(methodName);
-//            expand.invoke(service);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    //    private static void invokePanels(String methodName) {
+    //        try {
+    //            @SuppressLint("WrongConstant")
+    //            Object service = k.app().getSystemService("statusbar");
+    //            @SuppressLint("PrivateApi")
+    //            Class<?> statusBarManager = Class.forName("android.app.StatusBarManager");
+    //            Method expand = statusBarManager.getMethod(methodName);
+    //            expand.invoke(service);
+    //        } catch (Exception e) {
+    //            e.printStackTrace();
+    //        }
+    //    }
 }

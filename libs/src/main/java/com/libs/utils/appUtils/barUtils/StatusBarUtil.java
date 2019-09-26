@@ -1,4 +1,4 @@
-package com.libs.utils.appUtils.barUtils;//package mo.kklib.utils.appUtils;
+//package com.libs.utils.appUtils.barUtils;//package mo.kklib.utils.appUtils;
 //import android.annotation.TargetApi;
 //import android.app.Activity;
 //import android.content.Context;
@@ -538,3 +538,73 @@ package com.libs.utils.appUtils.barUtils;//package mo.kklib.utils.appUtils;
 //
 //
 //}
+//
+///**
+// * 设置沉浸式状态栏, 并为状态栏着色
+// *
+// * @param activity       Activity
+// * @param statusBarColor 需要设置的状态栏颜色
+// */
+//public static void setTranslucentStatusBar(Activity activity, int statusBarColor) {
+//        setTranslucentStatusBar(activity, statusBarColor, false);
+//        }
+//
+///**
+// * 设置沉浸式状态栏, 并为状态栏着色, 将状态栏颜色块添加在 Activity UI 层的后方(底下)
+// *
+// * @param activity       Activity
+// * @param statusBarColor 需要设置的状态栏颜色
+// */
+//public static void setTranslucentStatusBarBehind(Activity activity, int statusBarColor) {
+//        setTranslucentStatusBar(activity, statusBarColor, true);
+//        }
+//
+///**
+// * 设置沉浸式状态栏, 并为状态栏着色
+// *
+// * @param activity       Activity
+// * @param statusBarColor 需要设置的状态栏颜色
+// * @param behind         是否将状态栏颜色块添加在 Activity UI 层的后方
+// */
+//private static void setTranslucentStatusBar(Activity activity, int statusBarColor, boolean behind) {
+//        if (Build.VERSION.SDK_INT < 19) {
+//        return;
+//        }
+//        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//
+//        ViewGroup contentView = (ViewGroup) activity.getWindow().getDecorView();
+//        int statusBarHeight = getStatusBarHeight();
+//        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight);
+//        View statusBarBg = new View(activity);
+//        statusBarBg.setBackgroundColor(statusBarColor);
+//        if (behind) {
+//        contentView.addView(statusBarBg, 0, params);
+//        } else {
+//        contentView.addView(statusBarBg, params);
+//        }
+//        }
+//
+///**
+// * 设置沉浸式状态栏, 并为状态栏着色, 将颜色块嵌入在 Activity UI 层的前后方, 实现沉浸式效果
+// *
+// * @param activity       Activity
+// * @param statusBarColor 需要设置的状态栏颜色
+// */
+//public static void setTranslucentStatusBarWithInsertion(Activity activity, int statusBarColor) {
+//        if (Build.VERSION.SDK_INT < 19) {
+//        return;
+//        }
+//        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//
+//        ViewGroup contentView = (ViewGroup) activity.getWindow().getDecorView();
+//        int statusBarHeight = getStatusBarHeight();
+//        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight);
+//        View statusBarBg = new View(activity);
+//        View statusBarFg = new View(activity);
+//        int translucentColor = Color.argb(0x33, 0, 0, 0);
+//        int toolbarColor = ColorUtils.extractColor(statusBarColor, translucentColor);
+//        statusBarBg.setBackgroundColor(toolbarColor);
+//        statusBarFg.setBackgroundColor(translucentColor);
+//        contentView.addView(statusBarBg, 0, params);
+//        contentView.addView(statusBarFg, params);
+//        }
