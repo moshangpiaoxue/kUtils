@@ -73,11 +73,35 @@ public class BActivity extends AppCompatActivity {
             onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
         }
     };
-
+    @SuppressLint("HandlerLeak")
+    private MyHandler mHandler2 = new MyHandler(this) {
+        @Override
+        protected void doWhat(Activity activity, Message msg) {
+            onHandlerMessage(msg.arg1, msg.arg2, msg.obj, msg);
+        }
+    };
     protected void onHandlerMessage(int arg1, int arg2, Object obj, Message msg) {
 
     }
+    private abstract static class MyHandler extends Handler {
+        WeakReference<Activity> weakReference;
 
+        public MyHandler(Activity activity) {
+            weakReference = new WeakReference<Activity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (weakReference.get() != null) {
+                // update android ui
+                doWhat(weakReference.get(), msg);
+            }
+        }
+
+        protected abstract void doWhat(Activity activity, Message msg);
+
+    }
 
     /**
      * 1、当launchMode为singleTask的时候，如果这个界面处于栈顶也就是他正在显示的时候，使用intent跳转到这个界面想要刷新数据的时候，会没有反应，这个时候就要用到这个方法去接收数据
@@ -217,6 +241,7 @@ public class BActivity extends AppCompatActivity {
 //            RxBus.getDefault().unregisterAll();
 //        }
         mHandler.removeCallbacksAndMessages(null);
+        mHandler2.removeCallbacksAndMessages(null);
     }
 
     /**
