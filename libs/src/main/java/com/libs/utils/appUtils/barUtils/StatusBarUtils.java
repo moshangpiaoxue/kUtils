@@ -244,6 +244,17 @@ public class StatusBarUtils {
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setBackgroundColor(window, 0x80000000, true);
         }
+        // 适配刘海屏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams layoutParams = window.getAttributes();
+            layoutParams.layoutInDisplayCutoutMode =
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            window.setAttributes(layoutParams);
+        }
+//        // 适配Android 4.4
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//            setBackgroundColor(window, Color.TRANSPARENT, true);
+//        }
     }
     /**
      * 为滑动返回界面设置状态栏颜色
