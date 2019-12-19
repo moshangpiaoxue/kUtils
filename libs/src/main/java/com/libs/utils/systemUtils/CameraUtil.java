@@ -94,10 +94,11 @@ public class CameraUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (isAndroidQ) {
-            // 适配android 10
-            imageUri = createImageUri();
-        } else if (Build.VERSION.SDK_INT >= 24) {
+//        if (isAndroidQ) {
+//            // 适配android 10
+//            imageUri = createImageUri();
+//        } else
+            if (Build.VERSION.SDK_INT >= 24) {
             imageUri = FileProvider.getUriForFile(mActivity, AppInfoUtil.getAppInfo().getPackageName() + ".fileprovider", outImage);
 
         } else {
