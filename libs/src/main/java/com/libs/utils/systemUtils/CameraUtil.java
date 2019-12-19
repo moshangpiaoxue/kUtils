@@ -3,12 +3,14 @@ package com.libs.utils.systemUtils;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
@@ -53,6 +55,20 @@ public class CameraUtil {
     public static boolean hasFrontFacingCamera() {
         return checkCameraFacing(Camera.CameraInfo.CAMERA_FACING_FRONT);
     }
+    // 是否是Android 10以上手机
+    private static boolean isAndroidQ = Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q;
+    /**
+     * 创建图片地址uri,用于保存拍照后的照片 Android 10以后使用这种方法
+     */
+    private static Uri createImageUri() {
+        String status = Environment.getExternalStorageState();
+        // 判断是否有SD卡,优先使用SD卡存储,当没有SD卡时使用手机存储
+        if (status.equals(Environment.MEDIA_MOUNTED)) {
+            return k.app().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new ContentValues());
+        } else {
+            return k.app().getContentResolver().insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI, new ContentValues());
+        }
+    }
 
     /**
      * 开启拍照 跳系统相机并返回图片的uri
@@ -72,6 +88,10 @@ public class CameraUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (isAndroidQ) {
+            // 适配android 10
+            imageUri = createImageUri();
+        }else
         if (Build.VERSION.SDK_INT >= 24) {
             imageUri = FileProvider.getUriForFile(mActivity, AppInfoUtil.getAppInfo().getPackageName() + ".fileprovider", outImage);
 
