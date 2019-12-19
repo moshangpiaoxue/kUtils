@@ -86,7 +86,7 @@ public class KMediaActivity extends KReceiverActivity {
 //                                    //释放原始图片占用的内存，防止out of memory异常发生
 //                                    photo.recycle();
 //                                    iv_image.setImageBitmap(smallBitmap);
-                                    setMediaResult(phoneStatus, CompressScaled.getScaledBitmap(photo), "", data);
+                                    setMediaResult(phoneStatus, photo, "", data);
                                 }
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
