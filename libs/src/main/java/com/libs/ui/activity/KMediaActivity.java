@@ -145,7 +145,7 @@ public class KMediaActivity extends KReceiverActivity {
      * 媒体操作结果
      *
      * @param phontoType 操作类型  1==拍照  2==从相册选图片 3==录像 4==从相册选图片
-     * @param bitmap     位图
+     * @param bitmap     位图  有可能为null 10的手机没拿到
      * @param path       路径
      * @param data       返回数据
      */
