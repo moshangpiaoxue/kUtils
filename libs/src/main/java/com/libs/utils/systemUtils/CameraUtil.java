@@ -2,17 +2,20 @@ package com.libs.utils.systemUtils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.FileProvider;
 
 import com.libs.k;
@@ -22,6 +25,7 @@ import com.libs.utils.dataUtil.date.DateUtil;
 import com.libs.utils.logUtils.LogUtil;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
@@ -55,8 +59,10 @@ public class CameraUtil {
     public static boolean hasFrontFacingCamera() {
         return checkCameraFacing(Camera.CameraInfo.CAMERA_FACING_FRONT);
     }
+
     // 是否是Android 10以上手机
     private static boolean isAndroidQ = Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q;
+
     /**
      * 创建图片地址uri,用于保存拍照后的照片 Android 10以后使用这种方法
      */
@@ -91,8 +97,7 @@ public class CameraUtil {
         if (isAndroidQ) {
             // 适配android 10
             imageUri = createImageUri();
-        }else
-        if (Build.VERSION.SDK_INT >= 24) {
+        } else if (Build.VERSION.SDK_INT >= 24) {
             imageUri = FileProvider.getUriForFile(mActivity, AppInfoUtil.getAppInfo().getPackageName() + ".fileprovider", outImage);
 
         } else {
@@ -131,9 +136,9 @@ public class CameraUtil {
             videoUri = Uri.fromFile(outVideo);
         }
 
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
-//        mActivity.startActivityForResult(intent, KConstans.MEDIA_TAKE_PIC);
+        //        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //        intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
+        //        mActivity.startActivityForResult(intent, KConstans.MEDIA_TAKE_PIC);
         Intent intent = new Intent();
         intent.setAction("android.media.action.VIDEO_CAPTURE");
         intent.addCategory("android.intent.category.DEFAULT");
@@ -150,10 +155,10 @@ public class CameraUtil {
      */
     public static String handlerImageChooseResult(Intent data) {
         if (Build.VERSION.SDK_INT >= 19) {
-//            4.4(19)版本以上从相册选取图片后处理返回图片
+            //            4.4(19)版本以上从相册选取图片后处理返回图片
             return handlerImageAfter19(data);
         } else {
-//            4.4(19)版本以下从相册选取图片后处理返回图片
+            //            4.4(19)版本以下从相册选取图片后处理返回图片
             return CameraUtil.getImagePath(data.getData(), null);
         }
     }
@@ -223,4 +228,5 @@ public class CameraUtil {
         }
         return false;
     }
+
 }
