@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.libs.R;
 import com.libs.modle.listener.clickListener.KNoDoubleClickListener;
+import com.libs.utils.dataUtil.dealUtil.DensityUtil;
 
 
 /**
@@ -48,7 +50,8 @@ public class KTitleView extends FrameLayout {
         midle = (TextView) findViewById(R.id.tv_title_midle);
         right = (TextView) findViewById(R.id.tv_title_right);
         iv_title_right = findViewById(R.id.iv_title_right);
-        //左侧监听
+
+        //        //左侧监听
         left.setOnClickListener(new KNoDoubleClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
@@ -79,6 +82,7 @@ public class KTitleView extends FrameLayout {
             }
         });
     }
+
 
     /**
      * 整体隐藏
@@ -137,6 +141,7 @@ public class KTitleView extends FrameLayout {
     public void setMidleText(String midleText) {
         midle.setText(midleText);
     }
+
     public void setMidleTextColor(int color) {
         midle.setTextColor(color);
     }
@@ -155,14 +160,15 @@ public class KTitleView extends FrameLayout {
      * 设置右侧文字
      */
     public void setRightText(CharSequence text) {
-//        if (StringUtil.isEmpty(text)) {
-//            right.setText("");
-//            right.setVisibility(INVISIBLE);
-//        } else {
-            right.setText(text);
-            right.setVisibility(VISIBLE);
-//        }
+        //        if (StringUtil.isEmpty(text)) {
+        //            right.setText("");
+        //            right.setVisibility(INVISIBLE);
+        //        } else {
+        right.setText(text);
+        right.setVisibility(VISIBLE);
+        //        }
     }
+
     public void setRightText(String text, int color) {
         setRightText(text);
         midle.setTextColor(color);
@@ -173,6 +179,25 @@ public class KTitleView extends FrameLayout {
      */
     public void setRightSrc(int srcId) {
         iv_title_right.setImageResource(srcId);
+        iv_title_right.setVisibility(VISIBLE);
+        right.setVisibility(GONE);
+        //右侧监听
+        iv_title_right.setOnClickListener(new KNoDoubleClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                if (listener != null) {
+                    listener.rightClick(v);
+                }
+
+            }
+        });
+    }
+    public void setRightSrc(int srcId,int width,int height) {
+        iv_title_right.setImageResource(srcId);
+        ViewGroup.LayoutParams params = iv_title_right.getLayoutParams();
+        params.width = DensityUtil.dp2px(width);
+        params.height = DensityUtil.dp2px(height);
+        iv_title_right.setLayoutParams(params);
         iv_title_right.setVisibility(VISIBLE);
         right.setVisibility(GONE);
         //右侧监听

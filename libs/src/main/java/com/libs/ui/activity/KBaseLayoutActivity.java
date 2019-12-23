@@ -70,6 +70,7 @@ public abstract class KBaseLayoutActivity extends KBaseActivity {
     @Override
     protected void initView(ViewHolder mViewHolder, View rootView) {
         title = mViewHolder.getView(R.id.ktv_base_title);
+
         title.setListener(new KTitleView.KTitleBarClickListenerImpl() {
             @Override
             public void leftClick(View v) {
