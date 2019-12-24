@@ -23,7 +23,7 @@ import com.libs.view.dialog.IosAlertDialog;
  * @ data：2018/12/14
  * @ 功能：
  */
-public class KReceiverActivity extends BActivity  implements KOnNetChangeListener,
+public class KReceiverActivity extends KPermissionsActivity implements KOnNetChangeListener,
         KOnGpsChangeListener, KOnHomeListener, KOnLockScreenListener {
     private GPSBroadcastReceiver gpsBroadcastReceiver;
     private NetChangeBroadcastReceiver netBroadcastReceiver;
