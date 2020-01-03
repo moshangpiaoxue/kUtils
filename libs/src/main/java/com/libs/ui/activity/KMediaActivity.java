@@ -82,10 +82,10 @@ public class KMediaActivity extends KReceiverActivity {
                                 Bitmap photo = MediaStore.Images.Media.getBitmap(resolver, originalUri);
                                 if (photo != null) {
                                     //为防止原始图片过大导致内存溢出，这里先缩小原图显示，然后释放原始Bitmap占用的内存
-//                                    Bitmap smallBitmap = ImageTools.zoomBitmap(photo, photo.getWidth() / SCALE, photo.getHeight() / SCALE);
-//                                    //释放原始图片占用的内存，防止out of memory异常发生
-//                                    photo.recycle();
-//                                    iv_image.setImageBitmap(smallBitmap);
+                                    //                                    Bitmap smallBitmap = ImageTools.zoomBitmap(photo, photo.getWidth() / SCALE, photo.getHeight() / SCALE);
+                                    //                                    //释放原始图片占用的内存，防止out of memory异常发生
+                                    //                                    photo.recycle();
+                                    //                                    iv_image.setImageBitmap(smallBitmap);
                                     setMediaResult(phoneStatus, photo, "", data);
                                 }
                             } catch (FileNotFoundException e) {
@@ -93,13 +93,11 @@ public class KMediaActivity extends KReceiverActivity {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                        }else {
-                             imagePath = CameraUtil.handlerImageChooseResult(data);
+                        } else {
+                            imagePath = CameraUtil.handlerImageChooseResult(data);
                             setMediaResult(phoneStatus, CompressScaled.getScaledBitmap(BitmapFactory.decodeFile(imagePath)), imagePath, data);
                         }
-
-
-//                        setMediaResult(phoneStatus, BitmapFactory.decodeFile(imagePath), imagePath, data);
+                        //                        setMediaResult(phoneStatus, BitmapFactory.decodeFile(imagePath), imagePath, data);
                     }
                 }
                 break;
@@ -113,7 +111,7 @@ public class KMediaActivity extends KReceiverActivity {
                                 setMediaResult(phoneStatus, null, c.getString(0), data);
                             }
                         }
-//                        setMediaResult(phoneStatus, null, UriUtil.getPath(imageUri));
+                        //                        setMediaResult(phoneStatus, null, UriUtil.getPath(imageUri));
                     }
                 }
                 break;
@@ -183,7 +181,7 @@ public class KMediaActivity extends KReceiverActivity {
      */
     protected void actionMediaTakePic() {
         if (CameraUtil.isExistCamera()) {
-//            imageUri = CameraUtil.actionPhoneTake(mActivity);
+            //            imageUri = CameraUtil.actionPhoneTake(mActivity);
             phoneStatus = KConstans.MEDIA_TAKE_PIC;
             requestPermission(ConstansePermissionGroup.PERMISSIONS_CAMERA);
 
