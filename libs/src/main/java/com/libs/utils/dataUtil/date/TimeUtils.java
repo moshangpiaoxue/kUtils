@@ -281,9 +281,8 @@ public class TimeUtils {
      * @param timeLong 相对的日期
      */
     public static String getTime(long timeLong) {
-        return getTime(timeLong, true, 0);
+        return getTime(timeLong, true, 0,true);
     }
-
     /**
      * 将指定的时间长度转换成描述性字符串，如2天，3月1天12时5分4秒。
      *
@@ -291,7 +290,7 @@ public class TimeUtils {
      * @param isFull   是否全部显示： true 全部显示，如x年x月x日x时x分； false 简单显示,如4月 / 3天
      */
     public static String getTime(long timeLong, boolean isFull) {
-        return getTime(timeLong, isFull, 0);
+        return getTime(timeLong, isFull, 0,true);
     }
 
     /**
@@ -301,7 +300,7 @@ public class TimeUtils {
      * @param minUnit  最低显示单位, 6->年 5->月 4->日 3->时 2->分, 如3: 00时00分06秒
      */
     public static String formatTimeLongCn(long timeLong, int minUnit) {
-        return getTime(timeLong, true, minUnit);
+        return getTime(timeLong, true, minUnit,true);
     }
 
     /**
@@ -310,12 +309,16 @@ public class TimeUtils {
      * @param timeLong 相对的日期
      * @param isFull   是否全部显示： true 全部显示，如x年x月x日x时x分； false 简单显示,如4月 / 3天
      * @param minUnit  最低显示单位, 6->年 5->月 4->日 3->时 2->分, 如3: 00时00分06秒
+     * @param isUp      换算秒数在出现小数位的情况下，是否向上取整
      */
-    public static String getTime(long timeLong, boolean isFull, int minUnit) {
+    public static String getTime(long timeLong, boolean isFull, int minUnit,boolean isUp) {
         StringBuilder diffDesc = new StringBuilder();
 
         //换算秒，防止Int溢出,向上取整
-        timeLong = Math.round((double)( timeLong )/ 1000);
+//        timeLong = Math.round((double)( timeLong )/ 1000);
+        //向下取，抹掉小数位的秒
+//        timeLong = (long)Math.floor((double)( timeLong )/ 1000);
+        timeLong=isUp?Math.round((double)( timeLong )/ 1000):(long)Math.floor((double)( timeLong )/ 1000);
         Long year = timeLong / (60 * 60 * 24 * 30 * 12);
         timeLong = timeLong % (60 * 60 * 24 * 30 * 12);
 
