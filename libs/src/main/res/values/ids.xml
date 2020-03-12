@@ -2,4 +2,5 @@
 <resources>
     <!--状态栏操作用，不用管-->
     <item name="fake_status_bar_view" type="id" />
+    <item name="selected_view" type="id"/>
 </resources>
