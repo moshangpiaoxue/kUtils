@@ -172,7 +172,7 @@
             android:isSticky="true"
             android:keyWidth="13%p"
             android:keyEdgeFlags="left"
-            android:keyLabel="省" />
+            android:keyLabel="地区" />
         <Key
             android:codes="90"
             android:horizontalGap="3%p"

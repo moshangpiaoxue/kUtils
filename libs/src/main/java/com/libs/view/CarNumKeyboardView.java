@@ -115,8 +115,7 @@ public class CarNumKeyboardView extends RelativeLayout {
         @Override
         public void onKey(int primaryCode, int[] keyCodes) {
             Editable editable = editText.getText();
-            int start = editText.getSelectionStart();
-            // 完成
+            int start = editText.getSelectionStart();            // 完成
             if (primaryCode == Keyboard.KEYCODE_CANCEL) {
                 setKeyboardShow(false);
                 // 回退

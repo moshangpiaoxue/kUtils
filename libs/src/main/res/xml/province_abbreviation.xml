@@ -5,7 +5,7 @@
     android:keyHeight="8%p"
     android:verticalGap="0.0px">
 
-
+    <!--待输入汉字对应的为  10位 UNICODE编码-->
     <Row android:verticalGap="1%p">
         <Key
             android:codes="20140"
@@ -119,7 +119,7 @@
     <Row android:verticalGap="1%p">
         <Key
             android:codes="28189"
-            android:horizontalGap="11%p"
+            android:horizontalGap="1%p"
             android:keyWidth="8%p"
             android:keyEdgeFlags="left"
             android:keyLabel="渝" />
@@ -157,8 +157,19 @@
             android:codes="38738"
             android:horizontalGap="2%p"
             android:keyWidth="8%p"
-            android:keyEdgeFlags="right"
+
             android:keyLabel="青" />
+        <Key
+            android:codes="26032"
+            android:horizontalGap="2%p"
+            android:keyWidth="8%p"
+            android:keyEdgeFlags="right"
+            android:keyLabel="新" />
+        <Key
+            android:codes="29756"
+            android:horizontalGap="2%p"
+            android:keyWidth="8%p"
+            android:keyLabel="琼" />
     </Row>
 
     <Row>
@@ -166,19 +177,9 @@
             android:codes="-2"
             android:isModifier="true"
             android:isSticky="true"
-            android:keyWidth="13%p"
+            android:keyWidth="14%p"
             android:keyEdgeFlags="left"
-            android:keyLabel="123" />
-        <Key
-            android:codes="29756"
-            android:horizontalGap="8%p"
-            android:keyWidth="8%p"
-            android:keyLabel="琼" />
-        <Key
-            android:codes="26032"
-            android:horizontalGap="2%p"
-            android:keyWidth="8%p"
-            android:keyLabel="新" />
+            android:keyLabel="ABC" />
         <Key
             android:codes="23425"
             android:horizontalGap="2%p"
@@ -195,13 +196,28 @@
             android:keyWidth="8%p"
             android:keyLabel="澳" />
         <Key
-            android:codes="21488"
+            android:codes="35686"
             android:horizontalGap="2%p"
             android:keyWidth="8%p"
-            android:keyLabel="台" />
+            android:keyLabel="警" />
+        <Key
+            android:codes="39046"
+            android:horizontalGap="2%p"
+            android:keyWidth="8%p"
+            android:keyLabel="领" />
+        <Key
+            android:codes="20351"
+            android:horizontalGap="2%p"
+            android:keyWidth="8%p"
+            android:keyLabel="使" />
+        <Key
+            android:codes="23398"
+            android:horizontalGap="2%p"
+            android:keyWidth="8%p"
+            android:keyLabel="学" />
         <Key
             android:codes="-5"
-            android:horizontalGap="8%p"
+            android:horizontalGap="2%p"
             android:isRepeatable="false"
             android:keyWidth="13%p"
             android:keyEdgeFlags="right"

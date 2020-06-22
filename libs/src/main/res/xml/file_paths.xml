@@ -3,4 +3,25 @@
     <external-path
         name="images"
         path="."/>
+    <root-path
+        name="root"
+        path="rootPath" />
+    <files-path
+        name="files"
+        path="filePath" />
+
+    <cache-path
+        name="cache"
+        path="cachePath" />
+
+    <external-path
+        name="external"
+        path="aDemoCamera" />
+
+    <external-files-path
+        name="external_file_path"
+        path="externalFilePath" />
+    <external-cache-path
+        name="external_cache_path"
+        path="externalCachePath" />
 </paths>
