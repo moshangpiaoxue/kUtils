@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lLayout_bg"
+    android:id="@+id/ll_dialog_ios"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/iosdialog_bg_shape"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txt_title"
+        android:id="@+id/tv_dialog_ios_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -19,17 +19,18 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txt_msg"
+        android:id="@+id/tv_dialog_ios_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:lineSpacingMultiplier="1.4"
         android:layout_marginTop="14dp"
         android:gravity="center"
         android:textColor="#333333"
         android:textSize="15dp" />
 
-    <ImageView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginTop="14dp"
@@ -40,30 +41,30 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_neg"
+        <TextView
+            android:id="@+id/tv_dialog_ios_left"
             android:layout_width="wrap_content"
             android:layout_height="43dp"
             android:layout_weight="1"
             android:background="@drawable/iosdialog_left_selector"
             android:gravity="center"
-            android:textColor="#1b9bfc"
-            android:textSize="16sp" />
+            android:textColor="#999999"
+            android:textSize="15sp" />
 
-        <ImageView
-            android:id="@+id/img_line"
+        <TextView
+            android:id="@+id/tv_dialog_ios_line"
             android:layout_width="0.5dp"
             android:layout_height="43dp"
             android:background="#c6c6c6" />
 
-        <Button
-            android:id="@+id/btn_pos"
+        <TextView
+            android:id="@+id/tv_dialog_ios_right"
             android:layout_width="wrap_content"
             android:layout_height="43dp"
             android:layout_weight="1"
             android:background="@drawable/iosdialog_right_selector"
             android:gravity="center"
-            android:textColor="#1b9bfc"
+            android:textColor="#629EFF"
             android:textSize="15sp" />
     </LinearLayout>
 

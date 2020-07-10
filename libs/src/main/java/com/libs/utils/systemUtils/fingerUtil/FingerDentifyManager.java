@@ -115,19 +115,19 @@ public class FingerDentifyManager {
     public boolean isBiometricPromptEnable(boolean isShow) {
         if (isShow) {
             if (!isAboveApi23()) {
-                new IosAlertDialog(mActivity).builder().setMsg("您的系统版本过低不支持指纹登录，请取消").setCancelable(false).setNegativeButton("取消", null).show();
+                new IosAlertDialog(mActivity).builder().setMsg("您的系统版本过低不支持指纹登录，请取消").setCancelable(false).setLeftTextView("取消", null).show();
                 return false;
             } else if (!isHardwareDetected()) {
-                new IosAlertDialog(mActivity).builder().setMsg("您的设备不支持指纹登录，请取消").setCancelable(false).setNegativeButton("取消", null).show();
+                new IosAlertDialog(mActivity).builder().setMsg("您的设备不支持指纹登录，请取消").setCancelable(false).setLeftTextView("取消", null).show();
                 return false;
             } else if (!hasEnrolledFingerprints()) {
-                new IosAlertDialog(mActivity).builder().setMsg("您还没有录入指纹, 请在手机设置界面录入至少一个指纹").setCancelable(false).setNegativeButton("取消", null).show();
+                new IosAlertDialog(mActivity).builder().setMsg("您还没有录入指纹, 请在手机设置界面录入至少一个指纹").setCancelable(false).setLeftTextView("取消", null).show();
                 return false;
             } else if (!hasEnrolledFingerprints()) {
-                new IosAlertDialog(mActivity).builder().setMsg("您还没有设置锁屏密码, 请在手机设置界面设置").setCancelable(false).setNegativeButton("取消", null).show();
+                new IosAlertDialog(mActivity).builder().setMsg("您还没有设置锁屏密码, 请在手机设置界面设置").setCancelable(false).setLeftTextView("取消", null).show();
                 return false;
             } else if (isMuthError) {
-                new IosAlertDialog(mActivity).builder().setMsg("您的指纹验证多次错误，请稍后再试").setCancelable(false).setNegativeButton("取消", null).show();
+                new IosAlertDialog(mActivity).builder().setMsg("您的指纹验证多次错误，请稍后再试").setCancelable(false).setLeftTextView("取消", null).show();
                 return false;
             } else {
                 return true;

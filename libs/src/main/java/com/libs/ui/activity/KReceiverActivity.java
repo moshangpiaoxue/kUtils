@@ -8,6 +8,7 @@ import com.libs.broadcastreceivers.GPSBroadcastReceiver;
 import com.libs.broadcastreceivers.HomeBroadcastReceiver;
 import com.libs.broadcastreceivers.LockScreenBroadcastReceiver;
 import com.libs.broadcastreceivers.NetChangeBroadcastReceiver;
+import com.libs.modle.listener.clickListener.KOnItemClickListenerImpl;
 import com.libs.modle.listener.receiverListener.KOnGpsChangeListener;
 import com.libs.modle.listener.receiverListener.KOnHomeListener;
 import com.libs.modle.listener.receiverListener.KOnLockScreenListener;
@@ -121,9 +122,10 @@ public class KReceiverActivity extends KPermissionsActivity implements KOnNetCha
                     .setCancelable(false)
                     .setTitle("定位功能未开启")
                     .setMsg("请先打开GPS定位功能!")
-                    .setPositiveButton("设置", new View.OnClickListener() {
+                    .setLeftTextView("设置", new KOnItemClickListenerImpl(){
                         @Override
-                        public void onClick(View v) {
+                        public void onItemClick(View view, int position) {
+                            super.onItemClick(view, position);
                             // 转到手机设置界面，用户设置GPS
                             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             // 设置完成后返回到原来的界面
