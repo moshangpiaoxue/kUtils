@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,12 +8,15 @@
     <TextView
         android:id="@+id/tv_ios_toast"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:background="@drawable/k_bg_ios_toast"
+        android:layout_height="44dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="140dp"
+        android:background="@drawable/k_bg_ios_toast2"
         android:gravity="center"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
         android:text="asdf"
-        android:textColor="@color/color_333333" />
-</LinearLayout>
+        android:textColor="#FFFFFF"
+        android:textSize="14sp" />
+</RelativeLayout>
