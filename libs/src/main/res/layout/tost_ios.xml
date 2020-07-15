@@ -8,15 +8,17 @@
     <TextView
         android:id="@+id/tv_ios_toast"
         android:layout_width="wrap_content"
-        android:layout_height="44dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="140dp"
         android:background="@drawable/k_bg_ios_toast2"
         android:gravity="center"
         android:paddingLeft="32dp"
+        android:paddingTop="8dp"
         android:paddingRight="32dp"
-        android:text="asdf"
+        android:paddingBottom="8dp"
+        android:text=" "
         android:textColor="#FFFFFF"
         android:textSize="14sp" />
 </RelativeLayout>
