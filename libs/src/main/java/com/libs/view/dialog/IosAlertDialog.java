@@ -46,9 +46,9 @@ public class IosAlertDialog {
     /** 点击对话框外部区域是否允许对话框消失或者说点击屏幕或物理返回键，false不消失,true消失。 */
     private boolean canceledOnTouchOutside = false;
     private String leftTxt;
-    private KOnItemClickListener leftListener;
+    private OnClickListener leftListener;
     private String rightTxt;
-    private KOnItemClickListener rightListener;
+    private OnClickListener rightListener;
     private DialogInterface.OnDismissListener onDismissListener;
     private DialogInterface.OnKeyListener onKeyListener;
     private View coustomView = null;
@@ -90,13 +90,13 @@ public class IosAlertDialog {
         return this;
     }
 
-    public IosAlertDialog setLeftTextView(String leftTxt, KOnItemClickListener listener) {
+    public IosAlertDialog setLeftTextView(String leftTxt, OnClickListener listener) {
         this.leftTxt = leftTxt;
         this.leftListener = listener;
         return this;
     }
 
-    public IosAlertDialog setRightTextView(String rightTxt, KOnItemClickListener listener) {
+    public IosAlertDialog setRightTextView(String rightTxt, OnClickListener listener) {
         this.rightTxt = rightTxt;
         this.rightListener = listener;
         return this;
@@ -178,40 +178,18 @@ public class IosAlertDialog {
             public void onClick(View v) {
                 dismiss();
                 if (leftListener != null) {
-                    leftListener.onItemClick(v, 0);
+                    leftListener.onClick(v);
                 }
             }
-        });
-        tv_dialog_ios_left.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                dismiss();
-                if (leftListener != null) {
-                    leftListener.onItemLongClick(v, 0);
-                }
-                return false;
-            }
-
         });
         tv_dialog_ios_right.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
                 if (rightListener != null) {
-                    rightListener.onItemClick(v, 0);
+                    rightListener.onClick(v);
                 }
             }
-        });
-        tv_dialog_ios_right.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                dismiss();
-                if (rightListener != null) {
-                    rightListener.onItemLongClick(v, 0);
-                }
-                return false;
-            }
-
         });
         if (onDismissListener != null) {
             dialog.setOnDismissListener(onDismissListener);

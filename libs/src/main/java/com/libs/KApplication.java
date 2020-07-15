@@ -8,6 +8,8 @@ import android.os.Looper;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.hjq.toast.ToastUtils;
+
 
 /**
  * author：mo
@@ -94,7 +96,8 @@ public class KApplication extends MultiDexApplication {
         mMainThread = Thread.currentThread();
         mMainThreadId = android.os.Process.myTid();
         mHandler = new Handler();
-
+        // 在 Application 中初始化
+        ToastUtils.init(this);
     }
 
 

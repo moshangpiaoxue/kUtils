@@ -122,10 +122,10 @@ public class KReceiverActivity extends KPermissionsActivity implements KOnNetCha
                     .setCancelable(false)
                     .setTitle("定位功能未开启")
                     .setMsg("请先打开GPS定位功能!")
-                    .setLeftTextView("设置", new KOnItemClickListenerImpl(){
+                    .setLeftTextView("设置", new View.OnClickListener(){
                         @Override
-                        public void onItemClick(View view, int position) {
-                            super.onItemClick(view, position);
+                        public void onClick(View v) {
+
                             // 转到手机设置界面，用户设置GPS
                             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             // 设置完成后返回到原来的界面

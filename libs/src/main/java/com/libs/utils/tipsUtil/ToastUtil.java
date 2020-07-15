@@ -5,7 +5,9 @@ import android.os.Looper;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hjq.toast.ToastUtils;
 import com.libs.R;
 import com.libs.k;
 import com.libs.utils.viewUtil.ViewUtil;
@@ -22,6 +24,7 @@ public class ToastUtil {
 
     public static void showToast(final String msg) {
         showToast(msg, 1000);
+
     }
 
     public static void showToast(final String msg, int time) {
@@ -63,6 +66,8 @@ public class ToastUtil {
     }
 
     public static void showToastIos(String msg) {
+        ToastUtils.setGravity(Gravity.BOTTOM,0,150);
+        ToastUtils.show(msg);
         //        Toast toast = Toast.makeText(k.app(), msg, Toast.LENGTH_SHORT);
         //        LinearLayout layout = (LinearLayout) toast.getView();
         //        layout.setBackgroundResource(R.drawable.k_bg_ios_toast2);
@@ -71,15 +76,15 @@ public class ToastUtil {
         //        tv.setTextSize(14);
         //        toast.show();
 
-        android.widget.Toast toast = new android.widget.Toast(k.app());
-        View layout = ViewUtil.getView(k.app(), R.layout.tost_ios, null);
-        layout.setAlpha(0.7f);
-        toast.setView(layout);
-        toast.setDuration(android.widget.Toast.LENGTH_SHORT);
-        TextView tv_ios_toast = layout.findViewById(R.id.tv_ios_toast);
-        tv_ios_toast.setText("" + msg + "");
-        toast.setGravity(Gravity.FILL_HORIZONTAL, 0, 0);
-        toast.show();
+//        Toast toast = new Toast(k.app());
+//        View layout = ViewUtil.getView(k.app(), R.layout.tost_ios, null);
+//        TextView tv_ios_toast = layout.findViewById(R.id.tv_ios_toast);
+//        tv_ios_toast.setText(msg);
+////        layout.setAlpha(0.7f);
+//        toast.setView(layout);
+//        toast.setDuration(android.widget.Toast.LENGTH_SHORT);
+////        toast.setGravity(Gravity.TOP, 0, 150);
+//        toast.show();
     }
 
 
