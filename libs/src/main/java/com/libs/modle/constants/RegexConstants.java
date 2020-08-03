@@ -1,6 +1,8 @@
 package com.libs.modle.constants;
 
 
+import com.libs.ui.fragment.KDialogFragment;
+
 import java.util.regex.Pattern;
 
 /**
@@ -47,7 +49,6 @@ public final class RegexConstants {
      * 电信手机号码的正则表达式。
      */
     public static final String REGEX_PHONE_NUMBER_TELECOM = "(?!00|015|013)(0\\d{9,11})|(1(33|53|80|89)\\d{8})";
-
     /**
      * 正则表达式：验证手机号
      */

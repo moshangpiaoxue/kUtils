@@ -1,5 +1,6 @@
 package com.libs.view.scrollView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -80,6 +81,7 @@ public class KScrollView extends ScrollView {
     /**
      * 用于用户手指离开MyScrollView的时候获取MyScrollView滚动的Y距离，然后回调给onScroll方法中
      */
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
 
         public void handleMessage(android.os.Message msg) {

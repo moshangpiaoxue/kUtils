@@ -90,9 +90,9 @@ public class KRecycleView extends RecyclerView {
         } else if (getLayoutManager() instanceof GridLayoutManager) {
             ((GridLayoutManager) getLayoutManager()).scrollToPositionWithOffset(((GridLayoutManager) getLayoutManager()).getSpanCount() / position, 0);
         }
-//        else if (getLayoutManager() instanceof StaggeredGridLayoutManager) {
-//            ((StaggeredGridLayoutManager) getLayoutManager()).scrollToPositionWithOffset(((StaggeredGridLayoutManager) getLayoutManager()).getSpanCount()/position, 0);
-//        }
+        //        else if (getLayoutManager() instanceof StaggeredGridLayoutManager) {
+        //            ((StaggeredGridLayoutManager) getLayoutManager()).scrollToPositionWithOffset(((StaggeredGridLayoutManager) getLayoutManager()).getSpanCount()/position, 0);
+        //        }
     }
 
     /**
@@ -105,7 +105,7 @@ public class KRecycleView extends RecyclerView {
 
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        设置不滚动
+        //        设置不滚动
         if (!scroolSta) {
             int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
             super.onMeasure(widthMeasureSpec, expandSpec);
@@ -183,15 +183,15 @@ public class KRecycleView extends RecyclerView {
                 outRect.left = space;
                 outRect.right = space;
                 outRect.bottom = space;
-//                //由于每行都只有3个，所以第一个都是3的倍数，把左边距设为0
+                //                //由于每行都只有3个，所以第一个都是3的倍数，把左边距设为0
                 if (parent.getChildLayoutPosition(view) % spanCount == 0) {
                     outRect.left = 0;
                 }
-//                if (parent.getChildLayoutPosition(view) == 0) {
-//                    outRect.top = space;
-//                } else {
-//                    outRect.top = space;
-//                }
+                //                if (parent.getChildLayoutPosition(view) == 0) {
+                //                    outRect.top = space;
+                //                } else {
+                //                    outRect.top = space;
+                //                }
             }
         });
     }

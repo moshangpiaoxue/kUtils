@@ -33,7 +33,7 @@ public class KHorizontalScrollView extends HorizontalScrollView {
     }
     /**
      * 设置跟它联动的view
-     * @param mView
+     * @ param mView
      */
     public void setScrollView(View mView) {
         this.mView = mView;

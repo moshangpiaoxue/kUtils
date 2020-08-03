@@ -14,11 +14,19 @@ import com.libs.utils.dataUtil.StringUtil;
  * @ data：2019/5/13:9:05
  * @ 功能：
  */
-public enum HttpDialogLoading {
-    /**
-     * 单例
-     */
-    INSTANCE;
+public class HttpDialogLoading {
+    private static volatile HttpDialogLoading mInstance;
+    public static HttpDialogLoading getInstance() {
+        if (mInstance == null) {
+            synchronized (HttpDialogLoading.class) {
+                if (mInstance == null) {
+                    mInstance = new HttpDialogLoading();
+                }
+            }
+        }
+        return mInstance;
+    }
+
     private float dialogDim = 0.3f;
     private BaseDialog loadingDialog;
 

@@ -86,6 +86,7 @@
         <attr name="selectorEnabled" format="boolean" />
         <attr name="selectorDrawable" format="reference" />
     </declare-styleable>
+
     <declare-styleable name="BubbleIconLayout">
 
         <attr name="bubble_pic_one"
@@ -105,4 +106,10 @@
             format="reference" />
 
     </declare-styleable>
+
+    <declare-styleable name="MaxHeightRecyclerView1">
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
+
+
 </resources>

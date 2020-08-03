@@ -107,7 +107,7 @@ public abstract class BaseDialog {
      * 开启
      */
     public void show() {
-        if (!dialog.isShowing()) {
+        if (dialog!=null&&!dialog.isShowing()) {
             dialog.show();
         }
     }
@@ -116,7 +116,7 @@ public abstract class BaseDialog {
      * 关闭
      */
     public void dismiss() {
-        if (dialog.isShowing()) {
+        if (dialog!=null&&dialog.isShowing()) {
             dialog.dismiss();
             dialog.cancel();
         }
