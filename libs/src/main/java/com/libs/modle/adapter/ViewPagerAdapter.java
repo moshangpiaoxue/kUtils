@@ -1,6 +1,7 @@
 package com.libs.modle.adapter;
 
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -35,6 +36,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 //        super.destroyItem(container, position, object);
     }
 
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return super.getItemPosition(object);
+    }
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
         mCurrentFragment = (Fragment) object;
