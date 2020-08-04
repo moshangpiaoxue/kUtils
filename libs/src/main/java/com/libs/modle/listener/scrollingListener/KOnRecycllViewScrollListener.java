@@ -23,7 +23,10 @@ public abstract class KOnRecycllViewScrollListener extends RecyclerView.OnScroll
         /**
          * 瀑布流
          */
-        STAGGERED_GRID
+        STAGGERED_GRID,
+        /** 自定义 */
+        CUSTOM
+
     }
 
     /**
@@ -76,8 +79,7 @@ public abstract class KOnRecycllViewScrollListener extends RecyclerView.OnScroll
             } else if (layoutManager instanceof StaggeredGridLayoutManager) {
                 layoutManagerType = LAYOUT_MANAGER_TYPE.STAGGERED_GRID;
             } else {
-                throw new RuntimeException(
-                        "没找到布局管理器！");
+                layoutManagerType = LAYOUT_MANAGER_TYPE.CUSTOM;
             }
         }
 

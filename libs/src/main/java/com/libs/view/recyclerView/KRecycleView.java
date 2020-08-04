@@ -17,21 +17,22 @@ import android.view.View;
  * date: 2017/9/5 0005 11:38
  */
 public class KRecycleView extends RecyclerView {
-    /**
-     * 上下文
-     */
+
+    /** 上下文*/
     private Context mContext;
-    /**
-     * 是否滚动，为了处理当scrrolview嵌套recyclerview的时候数据显示不全
-     */
+
+    /** 是否滚动，为了处理当scrrolview嵌套recyclerview的时候数据显示不全*/
     private Boolean scroolSta = true;
-    /**
-     * 布局管理器 分三种，线性，表格和瀑布流
-     */
-    private LayoutManager layoutManager = null;
 
     public KRecycleView(Context context) {
-        super(context);
+        super(context,null);
+    }
+    public KRecycleView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs,0);
+    }
+
+    public KRecycleView(Context context, @Nullable AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
         mContext = context;
         setLayoutLinerVertical();
     }
@@ -40,7 +41,6 @@ public class KRecycleView extends RecyclerView {
      * 设置竖直线性布局
      */
     public void setLayoutLinerVertical() {
-        if (layoutManager == null) {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext()) {
                 @Override
                 public boolean canScrollHorizontally() {
@@ -54,21 +54,9 @@ public class KRecycleView extends RecyclerView {
             //解决数据加载完成后, 没有停留在顶部的问题
             this.setFocusable(false);
             this.setLayoutManager(linearLayoutManager);//跟scrollview兼容
-        }
 
     }
 
-    public KRecycleView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        mContext = context;
-        setLayoutLinerVertical();
-    }
-
-    public KRecycleView(Context context, @Nullable AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        mContext = context;
-        setLayoutLinerVertical();
-    }
 
     /**
      * 设置recycleview是否可以滚动
@@ -118,7 +106,6 @@ public class KRecycleView extends RecyclerView {
      * 设置竖直线性布局--设置间距
      */
     public void setLayoutLinerVertical(int space) {
-        if (layoutManager == null) {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext()) {
                 @Override
                 public boolean canScrollHorizontally() {
@@ -129,7 +116,6 @@ public class KRecycleView extends RecyclerView {
             this.setNestedScrollingEnabled(false);
             this.setLayoutManager(linearLayoutManager);//跟scrollview兼容
             this.addItemDecoration(new KRecyclerViewDivider(space));
-        }
     }
 
     /**

@@ -10,7 +10,7 @@ import com.libs.R;
 /**
  * @ author：mo
  * @ data：2020/7/7:17:27
- * @ 功能：
+ * @ 功能：可设置最大高度的rv
  */
 public class MaxHeightRecyclerView extends KRecycleView {
     private int mMaxHeight = -1;
