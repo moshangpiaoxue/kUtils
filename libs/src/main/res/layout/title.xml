@@ -9,16 +9,16 @@
 
     <LinearLayout
         android:id="@+id/ll_title_left"
-        android:layout_width="@dimen/dp_200"
+        android:layout_width="66dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_36">
+        android:paddingLeft="12dp">
 
         <ImageView
             android:id="@+id/iv_title_left"
-            android:layout_width="17dp"
-            android:layout_height="29dp"
+            android:layout_width="16dp"
+            android:layout_height="23dp"
             android:background="@mipmap/jiantou_fanhui_zuo" />
     </LinearLayout>
     <!--//中间显示文字-->
@@ -30,17 +30,17 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
         android:textColor="@color/color_333333"
-        android:textSize="26sp" />
+        android:textSize="16sp" />
     <!--//右侧-->
 
     <ImageView
         android:id="@+id/iv_title_right"
-        android:layout_width="@dimen/dp_156"
-        android:layout_height="@dimen/dp_74"
+        android:layout_width="52dp"
+        android:layout_height="24dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/dp_36"
+        android:layout_marginRight="12dp"
         android:visibility="gone" />
 
     <TextView
