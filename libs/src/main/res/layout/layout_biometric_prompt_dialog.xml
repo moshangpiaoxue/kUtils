@@ -24,8 +24,8 @@
             android:visibility="gone" />
 
         <ImageView
-            android:layout_width="@dimen/pt_dp_50"
-            android:layout_height="@dimen/pt_dp_50"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:src="@mipmap/finger_notice" />
@@ -35,9 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/pt_dp_30"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="@dimen/dp_42"
-            android:layout_marginRight="@dimen/pt_dp_30"
+            android:layout_marginRight="30dp"
             android:gravity="center"
             android:text="验证您的指纹"
             android:textColor="#CDCED0"

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_title"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_160"
+    android:layout_height="53dp"
     android:background="@color/color_ffffff"
     android:gravity="center_vertical">
     <!--//左侧返回-->
@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/iv_title_left"
-            android:layout_width="@dimen/dp_34"
-            android:layout_height="@dimen/dp_58"
+            android:layout_width="17dp"
+            android:layout_height="29dp"
             android:background="@mipmap/jiantou_fanhui_zuo" />
     </LinearLayout>
     <!--//中间显示文字-->
@@ -30,7 +30,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
         android:textColor="@color/color_333333"
-        android:textSize="@dimen/sp_52" />
+        android:textSize="26sp" />
     <!--//右侧-->
 
     <ImageView
