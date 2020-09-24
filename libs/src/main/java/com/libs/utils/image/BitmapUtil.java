@@ -35,6 +35,7 @@ import android.support.annotation.IntRange;
 import android.text.TextUtils;
 import android.view.View;
 
+
 import com.libs.k;
 import com.libs.utils.ResUtil;
 import com.libs.utils.dataUtil.StringUtil;
@@ -47,9 +48,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 
 
 /**
@@ -208,34 +209,43 @@ public class BitmapUtil {
     }
 
     /**
-     * 获取图像文件的信息，是否旋转了90度，如果是则反转
-     *
-     * @param bitmap
-     * @param path   图像的路径
-     * @return
+     * 镜像翻转
      */
-    public static Bitmap reviewPicRotate(Bitmap bitmap, String path) {
-        int degree = 0;
-        String mimeType = getBitmapType(path);
-        if (!TextUtils.isEmpty(mimeType) && !mimeType.equals("image/png")) {
-            degree = getRotateDegree(path);
-        }
-        if (degree != 0) {
-            try {
-                Matrix m = new Matrix();
-                int width = bitmap.getWidth();
-                int height = bitmap.getHeight();
-                m.setRotate(degree);
-                bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, m, true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } catch (Error err) {
-                err.printStackTrace();
-            }
-        }
-        return bitmap;
+    public static Bitmap getBitmapForMirror(Bitmap rawBitmap) {
+        Matrix matrix = new Matrix();
+        matrix.postScale(-1f, 1f);
+        return Bitmap.createBitmap(rawBitmap, 0, 0, rawBitmap.getWidth(), rawBitmap.getHeight(), matrix, true);
     }
 
+    /**
+     * 根据角度旋转
+     */
+    public static Bitmap getBitmapForRotate(Bitmap bitmap, String path) {
+        return getBitmapForRotate(bitmap,getRotateDegree(path));
+    }
+
+    /**
+     * 根据角度旋转
+     */
+    public static Bitmap getBitmapForRotate(Bitmap bm, int degree) {
+        Bitmap returnBm = null;
+
+        // 根据旋转角度，生成旋转矩阵
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        try {
+            // 将原始图片按照旋转矩阵进行旋转，并得到新的图片
+            returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+        } catch (OutOfMemoryError e) {
+        }
+        if (returnBm == null) {
+            returnBm = bm;
+        }
+        if (bm != returnBm) {
+            bm.recycle();
+        }
+        return returnBm;
+    }
     /**
      * 读取图像属性：旋转的角度
      *
@@ -283,6 +293,45 @@ public class BitmapUtil {
             e.printStackTrace();
         }
     }
+    /**
+     * 高级图片质量压缩
+     *
+     * @param bitmap  位图
+     * @param width 压缩后的宽度，单位像素
+     */
+    public static Bitmap getBitmapForZoom(Bitmap bitmap, double width) {
+        // 将bitmap放至数组中，意在获得bitmap的大小（与实际读取的原文件要大）
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        // 格式、质量、输出流
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+        byte[] b = baos.toByteArray();
+        Bitmap newBitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+        // 获取bitmap大小 是允许最大大小的多少倍
+        return getBitmapForScaleWithWH(newBitmap, width,   width * newBitmap.getHeight() / newBitmap.getWidth());
+    }
+    /***
+     * 图片缩放
+     *@param bitmap 位图
+     * @param w 新的宽度
+     * @param h 新的高度
+     * @return Bitmap
+     */
+    public static Bitmap getBitmapForScaleWithWH(Bitmap bitmap, double w, double h) {
+        if (w == 0 || h == 0 || bitmap == null) {
+            return bitmap;
+        } else {
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+
+            Matrix matrix = new Matrix();
+            float scaleWidth = (float) (w / width);
+            float scaleHeight = (float) (h / height);
+
+            matrix.postScale(scaleWidth, scaleHeight);
+            return Bitmap.createBitmap(bitmap, 0, 0, width, height,
+                    matrix, true);
+        }
+    }
 
     /**
      * 图像质量压缩
@@ -327,7 +376,7 @@ public class BitmapUtil {
      */
     public static Bitmap getBitmap(@DrawableRes int resId) {
         return BitmapFactory.decodeResource(k.app().getResources(), resId);
-//        return ResUtil.getBitmap(resId);
+        //        return ResUtil.getBitmap(resId);
     }
 
     /**
@@ -403,18 +452,19 @@ public class BitmapUtil {
      */
     public static Bitmap getBitmap2(final String filePath) {
         return StringUtil.isSpace(filePath) ? null : BitmapFactory.decodeFile(filePath);
-//        FileInputStream fis = null;
-//        try {
-//            fis = new FileInputStream(filePath);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        Bitmap bitmap = BitmapFactory.decodeStream(fis);
+        //        FileInputStream fis = null;
+        //        try {
+        //            fis = new FileInputStream(filePath);
+        //        } catch (FileNotFoundException e) {
+        //            e.printStackTrace();
+        //        }
+        //        Bitmap bitmap = BitmapFactory.decodeStream(fis);
     }
 
 
     /**
-     *FileDescriptor 转 Bitmap
+     * FileDescriptor 转 Bitmap
+     *
      * @param fd 文件描述
      * @return bitmap
      */
@@ -443,7 +493,8 @@ public class BitmapUtil {
 
 
     /**
-     *Drawable 转 Bitmap
+     * Drawable 转 Bitmap
+     *
      * @param drawable
      * @return
      */
@@ -525,7 +576,24 @@ public class BitmapUtil {
     public static Bitmap getBitmap(byte[] bytes) {
         return (bytes == null || bytes.length == 0) ? null : BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
-
+    /**
+     * bitmap转bytes
+     */
+    public static byte[] getBytes(Bitmap bitmap, int quality) {
+        if (bitmap == null) {
+            return null;
+        }
+        int size = bitmap.getWidth() * bitmap.getHeight() * 4;
+        ByteArrayOutputStream out = new ByteArrayOutputStream(size);
+        try {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, out);
+            out.flush();
+            out.close();
+            return out.toByteArray();
+        } catch (IOException e) {
+            return null;
+        }
+    }
     /**
      * Bitmap转byte[]
      *
@@ -1633,5 +1701,67 @@ public class BitmapUtil {
         return ret;
     }
 
+    /**
+     * 将图片保存到磁盘中
+     *
+     * @param bitmap
+     * @param file   图片保存目录——不包含图片名
+     * @param path   图片保存文件路径——包含图片名
+     * @return
+     */
+    public static boolean saveBitmap(Bitmap bitmap, File file, File path) {
+        boolean success = false;
+        byte[] bytes = getBytes(bitmap, 100);
+        OutputStream out = null;
+        try {
+            if (!file.exists() && file.isDirectory()) {
+                file.mkdirs();
+            }
+            out = new FileOutputStream(path);
+            out.write(bytes);
+            out.flush();
+            success = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return success;
+    }
+    /**
+     * bitmap保存到指定路径
+     *
+     * @param file 图片的绝对路径
+     * @param file 位图
+     * @return bitmap
+     */
+    public static boolean saveFile(String file, Bitmap bmp) {
+        if (TextUtils.isEmpty(file) || bmp == null) return false;
 
+        File f = new File(file);
+        if (f.exists()) {
+            f.delete();
+        } else {
+            File p = f.getParentFile();
+            if (!p.exists()) {
+                p.mkdirs();
+            }
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(f);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

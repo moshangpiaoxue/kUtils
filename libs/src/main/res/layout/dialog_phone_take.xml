@@ -36,7 +36,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
-                android:background="@color/color_c1c1c1" />
+                android:background="#ffe2e2e2" />
 
             <TextView
                 android:id="@+id/btn_pick_photo"
