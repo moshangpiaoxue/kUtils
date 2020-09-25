@@ -128,7 +128,10 @@ public class CameraHelper {
             }
         });
     }
-
+    public void onResume() {
+        releaseCamera();
+        initCameraInfo();
+    }
     /**
      * 初始化
      */
