@@ -1,26 +1,21 @@
 package com.libs.ui.activity;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.IntRange;
 
 import com.libs.modle.constants.ConstansePermissionGroup;
 import com.libs.modle.constants.KConstans;
 import com.libs.utils.dataUtil.KUriUtil;
+import com.libs.utils.fileUtil.FilePathUtil;
 import com.libs.utils.image.BitmapUtil;
-import com.libs.utils.image.CompressScaled;
 import com.libs.utils.systemUtils.CameraUtil;
 import com.libs.utils.systemUtils.storageUtil.SDCardUtil;
 import com.libs.utils.tipsUtil.ToastUtil;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 
 /**
@@ -72,31 +67,34 @@ public class KMediaActivity extends KReceiverActivity {
             case KConstans.MEDIA_CHOOSE_PIC:
                 if (phoneStatus == KConstans.MEDIA_CHOOSE_PIC) {
                     if (resultCode == RESULT_OK) {
-                        String imagePath;
-                        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                            ContentResolver resolver = getContentResolver();
-                            //照片的原始资源地址
-                            Uri originalUri = data.getData();
-                            try {
-                                //使用ContentProvider通过URI获取原始图片
-                                Bitmap photo = MediaStore.Images.Media.getBitmap(resolver, originalUri);
-                                if (photo != null) {
-                                    //为防止原始图片过大导致内存溢出，这里先缩小原图显示，然后释放原始Bitmap占用的内存
-                                    //                                    Bitmap smallBitmap = ImageTools.zoomBitmap(photo, photo.getWidth() / SCALE, photo.getHeight() / SCALE);
-                                    //                                    //释放原始图片占用的内存，防止out of memory异常发生
-                                    //                                    photo.recycle();
-                                    //                                    iv_image.setImageBitmap(smallBitmap);
-                                    setMediaResult(phoneStatus, photo, "", data);
-                                }
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            imagePath = CameraUtil.handlerImageChooseResult(data);
-                            setMediaResult(phoneStatus, CompressScaled.getScaledBitmap(BitmapFactory.decodeFile(imagePath)), imagePath, data);
-                        }
+                        String imagePath = FilePathUtil.getRealPathFromUri(data);
+                        // 2020-09-27 修改获取相册选图片路径并且处理图片旋转
+                        setMediaResult(phoneStatus, BitmapUtil.getBitmapForRotate(
+                                BitmapFactory.decodeFile(imagePath), BitmapUtil.getRotateDegree(imagePath)), imagePath, data);
+                        //                        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                        //                            ContentResolver resolver = getContentResolver();
+                        //                            //照片的原始资源地址
+                        //                            Uri originalUri = data.getData();
+                        //                            try {
+                        //                                //使用ContentProvider通过URI获取原始图片
+                        //                                Bitmap photo = MediaStore.Images.Media.getBitmap(resolver, originalUri);
+                        //                                if (photo != null) {
+                        //                                    //为防止原始图片过大导致内存溢出，这里先缩小原图显示，然后释放原始Bitmap占用的内存
+                        //                                    //                                    Bitmap smallBitmap = ImageTools.zoomBitmap(photo, photo.getWidth() / SCALE, photo.getHeight() / SCALE);
+                        //                                    //                                    //释放原始图片占用的内存，防止out of memory异常发生
+                        //                                    //                                    photo.recycle();
+                        //                                    //                                    iv_image.setImageBitmap(smallBitmap);
+                        //                                    setMediaResult(phoneStatus, photo, "", data);
+                        //                                }
+                        //                            } catch (FileNotFoundException e) {
+                        //                                e.printStackTrace();
+                        //                            } catch (IOException e) {
+                        //                                e.printStackTrace();
+                        //                            }
+                        //                        } else {
+                        //                            imagePath = CameraUtil.handlerImageChooseResult(data);
+                        //                            setMediaResult(phoneStatus, CompressScaled.getScaledBitmap(BitmapFactory.decodeFile(imagePath)), imagePath, data);
+                        //                        }
                         //                        setMediaResult(phoneStatus, BitmapFactory.decodeFile(imagePath), imagePath, data);
                     }
                 }
